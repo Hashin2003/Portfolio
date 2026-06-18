@@ -32,6 +32,30 @@
             --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        [data-theme="dark"] {
+            --primary: #E6ECF7;
+            --primary-light: #C7D2E8;
+            --primary-dark: #FFFFFF;
+            --accent: #E2C173;
+            --accent-light: #F1D896;
+            --accent-dark: #C9A24C;
+            --bg: #0A1124;
+            --bg-soft: #121B33;
+            --card-bg: #131C36;
+            --text: #ECEFF7;
+            --text-light: #A6B0C6;
+            --text-muted: #6B7693;
+            --border: #1F2A48;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.35);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
+            --shadow-xl: 0 24px 60px rgba(0,0,0,0.65);
+        }
+        [data-theme="dark"] .navbar { background: rgba(10,17,36,0.75); border-bottom-color: rgba(255,255,255,0.06); }
+        [data-theme="dark"] .nav-link:hover { background: rgba(255,255,255,0.06); }
+        [data-theme="dark"] .chip:hover { background: var(--accent); color: #0A1124; border-color: var(--accent); }
+        [data-theme="dark"] .nav-links.open { background: rgba(10,17,36,0.96) !important; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html { scroll-behavior: smooth; scroll-padding-top: 90px; }
@@ -95,6 +119,18 @@
             display: none; background: transparent; border: none; cursor: pointer;
             color: var(--primary); padding: 8px;
         }
+        .theme-toggle {
+            background: transparent; border: 1px solid var(--border); cursor: pointer;
+            color: var(--primary); padding: 8px; border-radius: 999px;
+            width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
+            transition: all 0.2s var(--ease);
+        }
+        .theme-toggle:hover { background: var(--bg-soft); transform: rotate(15deg); }
+        .theme-toggle .ico { width: 18px; height: 18px; }
+        .theme-toggle .ico-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .ico-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .ico-moon { display: block; }
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
 
         /* HERO */
         .hero-wrap { padding-top: 90px; }
@@ -629,6 +665,28 @@
             .filter-bar { width: 100%; justify-content: flex-start; overflow-x: auto; }
         }
 
+        @media (max-width: 560px) {
+            .nav-inner { padding: 10px 16px; gap: 8px; }
+            .nav-brand { font-size: 0.95em; }
+            .nav-brand span:last-child { display: none; }
+            .hero { padding: 28px 18px; border-radius: var(--radius); }
+            .hero h1 { font-size: clamp(1.8em, 8vw, 2.4em); }
+            .hero-headline { font-size: 1.05em; }
+            .hero-portrait { width: 200px; height: 200px; border-radius: 24px; }
+            .hero-portrait .portrait-initials { font-size: 3.4em; }
+            .contact-chips { gap: 8px; }
+            .chip { padding: 8px 12px; font-size: 0.82em; }
+            .media-showcase-grid { grid-template-columns: 1fr; }
+            .section { padding: 22px 16px; border-radius: var(--radius); }
+            .section-title { font-size: 1.2em; }
+            .modal-overlay { padding: 0; }
+            .modal-content { border-radius: 0; max-height: 100vh; height: 100vh; }
+            .modal-header { padding: 20px 18px 16px; }
+            .modal-main, .modal-aside { padding: 18px; }
+            .filter-btn { font-size: 0.82em; padding: 7px 12px; white-space: nowrap; }
+            ::-webkit-scrollbar { width: 4px; }
+        }
+
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
         .section { animation: fadeInUp 0.5s var(--ease) both; }
         ::-webkit-scrollbar { width: 8px; }
@@ -677,6 +735,8 @@
             <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 12h2l3-9 4 18 3-9h8"/></symbol>
             <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
             <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+            <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
         </defs>
     </svg>
 
@@ -696,6 +756,12 @@
                 <a href="#skills" class="nav-link" onclick="closeNav()">Skills</a>
                 <a href="#achievements" class="nav-link" onclick="closeNav()">Achievements</a>
                 <a href="#education" class="nav-link" onclick="closeNav()">Education</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark">
+                    <svg class="ico ico-sun"><use href="#i-sun"/></svg>
+                    <svg class="ico ico-moon"><use href="#i-moon"/></svg>
+                </button>
             </div>
         </div>
     </nav>
@@ -1686,6 +1752,20 @@
         }
         function closeNav() {
             document.getElementById('navLinks').classList.remove('open');
+        }
+
+        // Theme toggle (light/dark) with persistence + system preference
+        (function initTheme(){
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+        function toggleTheme() {
+            const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const next = cur === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
         }
     </script>
 </body>
