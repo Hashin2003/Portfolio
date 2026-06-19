@@ -1,1772 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hashin Gayasha Maharambage - Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0B1F3F;
-            --primary-light: #1B3566;
-            --primary-dark: #060F22;
-            --accent: #C9A24C;
-            --accent-light: #E2C173;
-            --accent-dark: #9B7D2E;
-            --bg: #F4F5F8;
-            --bg-soft: #ECEFF4;
-            --card-bg: #FFFFFF;
-            --text: #1A2233;
-            --text-light: #5A6478;
-            --text-muted: #97A0B3;
-            --border: #E3E7EE;
-            --shadow-sm: 0 1px 2px rgba(11, 31, 63, 0.04), 0 1px 3px rgba(11, 31, 63, 0.06);
-            --shadow-md: 0 4px 12px rgba(11, 31, 63, 0.06), 0 8px 24px rgba(11, 31, 63, 0.05);
-            --shadow-lg: 0 12px 40px rgba(11, 31, 63, 0.12);
-            --shadow-xl: 0 24px 60px rgba(11, 31, 63, 0.18);
-            --radius-sm: 8px;
-            --radius: 14px;
-            --radius-lg: 20px;
-            --ease: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        [data-theme="dark"] {
-            --primary: #E6ECF7;
-            --primary-light: #C7D2E8;
-            --primary-dark: #FFFFFF;
-            --accent: #E2C173;
-            --accent-light: #F1D896;
-            --accent-dark: #C9A24C;
-            --bg: #0A1124;
-            --bg-soft: #121B33;
-            --card-bg: #131C36;
-            --text: #ECEFF7;
-            --text-light: #A6B0C6;
-            --text-muted: #6B7693;
-            --border: #1F2A48;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.45), 0 8px 24px rgba(0,0,0,0.35);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
-            --shadow-xl: 0 24px 60px rgba(0,0,0,0.65);
-        }
-        [data-theme="dark"] .navbar { background: rgba(10,17,36,0.75); border-bottom-color: rgba(255,255,255,0.06); }
-        [data-theme="dark"] .nav-link:hover { background: rgba(255,255,255,0.06); }
-        [data-theme="dark"] .chip:hover { background: var(--accent); color: #0A1124; border-color: var(--accent); }
-        [data-theme="dark"] .nav-links.open { background: rgba(10,17,36,0.96) !important; }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background: var(--bg);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        h1, h2, h3, h4, h5 { font-family: 'Sora', 'Inter', sans-serif; letter-spacing: -0.02em; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
-
-        /* SVG ICONS */
-        .ico {
-            width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor;
-            stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round;
-        }
-        .ico-lg { width: 28px; height: 28px; stroke-width: 1.6; }
-        .ico-section {
-            width: 26px; height: 26px; stroke-width: 1.8;
-            color: var(--accent); flex-shrink: 0;
-        }
-
-        /* NAVBAR */
-        .navbar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(11, 31, 63, 0.08);
-            transition: all 0.3s var(--ease);
-        }
-        .nav-inner {
-            max-width: 1200px; margin: 0 auto; padding: 14px 24px;
-            display: flex; align-items: center; justify-content: space-between; gap: 24px;
-        }
-        .nav-brand {
-            font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05em;
-            color: var(--primary); letter-spacing: -0.02em; text-decoration: none;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .nav-brand-mark {
-            width: 32px; height: 32px; border-radius: 8px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: var(--accent-light); display: flex; align-items: center; justify-content: center;
-            font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9em;
-        }
-        .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-        .nav-link {
-            color: var(--text-light); text-decoration: none; font-size: 0.9em; font-weight: 500;
-            padding: 8px 14px; border-radius: 8px;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-        .nav-link:hover { color: var(--primary); background: rgba(11, 31, 63, 0.05); }
-        .nav-toggle {
-            display: none; background: transparent; border: none; cursor: pointer;
-            color: var(--primary); padding: 8px;
-        }
-        .theme-toggle {
-            background: transparent; border: 1px solid var(--border); cursor: pointer;
-            color: var(--primary); padding: 8px; border-radius: 999px;
-            width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
-            transition: all 0.2s var(--ease);
-        }
-        .theme-toggle:hover { background: var(--bg-soft); transform: rotate(15deg); }
-        .theme-toggle .ico { width: 18px; height: 18px; }
-        .theme-toggle .ico-moon { display: none; }
-        [data-theme="dark"] .theme-toggle .ico-sun { display: none; }
-        [data-theme="dark"] .theme-toggle .ico-moon { display: block; }
-        .nav-actions { display: flex; align-items: center; gap: 10px; }
-
-        /* HERO */
-        .hero-wrap { padding-top: 90px; }
-        .hero {
-            background: var(--card-bg); border-radius: var(--radius-lg);
-            padding: 56px 56px; margin-bottom: 36px;
-            box-shadow: var(--shadow-md); border: 1px solid var(--border);
-            position: relative; overflow: hidden;
-        }
-        .hero::before {
-            content: ''; position: absolute; inset: 0;
-            background:
-                radial-gradient(circle at 88% 12%, rgba(201, 162, 76, 0.10), transparent 45%),
-                radial-gradient(circle at 8% 92%, rgba(11, 31, 63, 0.07), transparent 45%);
-            pointer-events: none;
-        }
-        .hero-grid {
-            display: grid; grid-template-columns: 1.4fr 1fr;
-            gap: 56px; align-items: center; position: relative;
-        }
-        .hero-eyebrow {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-size: 0.78em; font-weight: 600; letter-spacing: 0.14em;
-            text-transform: uppercase; color: var(--accent-dark);
-            padding: 6px 12px; border-radius: 999px;
-            background: rgba(201, 162, 76, 0.10); border: 1px solid rgba(201, 162, 76, 0.25);
-            margin-bottom: 18px;
-        }
-        .hero-eyebrow::before {
-            content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-        }
-        .hero h1 {
-            font-size: clamp(2.2em, 4vw, 3.2em); color: var(--primary);
-            font-weight: 800; line-height: 1.05; margin-bottom: 12px;
-        }
-        .hero-headline {
-            font-size: 1.25em; color: var(--text); font-weight: 500;
-            margin-bottom: 22px; line-height: 1.45;
-        }
-        .hero-headline .accent { color: var(--accent-dark); font-weight: 600; }
-        .hero-bio {
-            color: var(--text-light); font-size: 0.98em;
-            margin-bottom: 28px; max-width: 540px;
-        }
-        .contact-chips {
-            display: flex; flex-wrap: wrap; gap: 10px;
-        }
-        .chip {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--bg-soft); border: 1px solid var(--border);
-            color: var(--text); text-decoration: none;
-            padding: 9px 14px; border-radius: 999px;
-            font-size: 0.88em; font-weight: 500;
-            transition: all 0.2s var(--ease);
-        }
-        .chip:hover {
-            background: var(--primary); color: #fff; border-color: var(--primary);
-            transform: translateY(-2px); box-shadow: var(--shadow-sm);
-        }
-        .chip .ico { width: 15px; height: 15px; color: var(--accent-dark); transition: color 0.2s; }
-        .chip:hover .ico { color: var(--accent-light); }
-
-        /* HERO PORTRAIT */
-        .hero-portrait-wrap {
-            display: flex; justify-content: center; align-items: center; position: relative;
-        }
-        .hero-portrait {
-            width: 320px; height: 320px;
-            border-radius: 36px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            position: relative;
-            box-shadow:
-                0 30px 60px -20px rgba(11, 31, 63, 0.45),
-                0 0 0 1px rgba(255, 255, 255, 0.06) inset;
-            overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .hero-portrait::after {
-            content: ''; position: absolute; inset: 0;
-            background:
-                radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12), transparent 55%),
-                radial-gradient(circle at 75% 85%, rgba(201, 162, 76, 0.22), transparent 60%);
-        }
-        .hero-portrait img {
-            width: 100%; height: 100%; object-fit: cover;
-            position: relative; z-index: 1;
-        }
-        .hero-portrait .portrait-placeholder {
-            position: relative; z-index: 1; text-align: center;
-            color: rgba(255, 255, 255, 0.85); padding: 24px;
-        }
-        .hero-portrait .portrait-initials {
-            font-family: 'Sora', sans-serif; font-size: 4.5em; font-weight: 700;
-            background: linear-gradient(135deg, #fff, var(--accent-light));
-            -webkit-background-clip: text; background-clip: text;
-            -webkit-text-fill-color: transparent; line-height: 1;
-        }
-        .hero-portrait .portrait-hint {
-            font-size: 0.78em; color: rgba(255,255,255,0.7); margin-top: 14px;
-            letter-spacing: 0.05em;
-        }
-        .hero-portrait-ring {
-            position: absolute; inset: -14px;
-            border-radius: 44px; border: 1.5px dashed rgba(201, 162, 76, 0.45);
-            pointer-events: none;
-        }
-        .hero-portrait-badge {
-            position: absolute; bottom: 16px; right: 20px; z-index: 100;
-            background: var(--card-bg); border: 1px solid var(--border);
-            padding: 10px 14px; border-radius: 12px;
-            box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 8px;
-            font-size: 0.82em; font-weight: 600; color: var(--primary);
-        }
-        .hero-portrait-badge .dot {
-            width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
-        }
-
-        /* SECTIONS */
-        .section {
-            background: var(--card-bg); border-radius: var(--radius-lg);
-            margin-bottom: 36px; padding: 44px 48px;
-            box-shadow: var(--shadow-md); border: 1px solid var(--border);
-            transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
-            scroll-margin-top: 90px;
-        }
-        .section:hover { box-shadow: var(--shadow-lg); }
-        .section-head {
-            display: flex; align-items: center; gap: 14px;
-            margin-bottom: 28px; padding-bottom: 18px;
-            border-bottom: 1px solid var(--border);
-        }
-        .section-icon {
-            width: 44px; height: 44px; border-radius: 12px;
-            background: linear-gradient(135deg, rgba(201, 162, 76, 0.15), rgba(201, 162, 76, 0.05));
-            border: 1px solid rgba(201, 162, 76, 0.25);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--accent-dark); flex-shrink: 0;
-        }
-        .section-title {
-            font-size: 1.65em; color: var(--primary); font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        .section-eyebrow {
-            display: block; font-size: 0.72em; font-weight: 600;
-            color: var(--accent-dark); text-transform: uppercase;
-            letter-spacing: 0.16em; margin-bottom: 4px;
-        }
-
-        /* ABOUT */
-        .about-content { font-size: 1.02em; line-height: 1.8; color: var(--text-light); }
-        .about-content p { margin-bottom: 16px; }
-        .about-content p:last-child { margin-bottom: 0; }
-        .highlight-box {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: #fff; padding: 22px 28px; border-radius: var(--radius);
-            margin: 24px 0; text-align: center; font-weight: 600;
-            font-size: 1.12em; letter-spacing: 0.02em;
-            box-shadow: var(--shadow-md);
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-        }
-        .highlight-box .ico { width: 22px; height: 22px; color: var(--accent-light); }
-
-        /* PROJECT FILTER BAR */
-        .filter-bar {
-            display: flex; gap: 6px; padding: 6px;
-            background: var(--bg-soft); border: 1px solid var(--border);
-            border-radius: 999px; margin-bottom: 28px; flex-wrap: wrap;
-            width: fit-content;
-        }
-        .filter-btn {
-            background: transparent; border: none; cursor: pointer;
-            padding: 9px 20px; border-radius: 999px;
-            font-family: inherit; font-size: 0.9em; font-weight: 600;
-            color: var(--text-light); transition: all 0.25s var(--ease);
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-        .filter-btn:hover { color: var(--primary); }
-        .filter-btn.active {
-            background: var(--primary); color: #fff;
-            box-shadow: 0 4px 12px rgba(11, 31, 63, 0.25);
-        }
-        .filter-btn .count {
-            font-size: 0.78em; opacity: 0.7; font-weight: 500;
-            padding: 1px 7px; border-radius: 999px;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        .filter-btn:not(.active) .count { background: rgba(11, 31, 63, 0.08); color: var(--text-light); }
-
-        /* PROJECT CATEGORY LABELS */
-        .project-category-label {
-            font-size: 1.1em; color: var(--primary); font-weight: 600;
-            margin: 36px 0 18px 0; padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; gap: 10px;
-        }
-        .project-category-label::before {
-            content: ''; width: 4px; height: 18px; border-radius: 2px; background: var(--accent);
-        }
-        .project-category-label:first-of-type { margin-top: 0; }
-
-        .projects-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 22px;
-        }
-
-        .project-card {
-            background: var(--card-bg); border-radius: var(--radius);
-            padding: 26px 26px 22px; border: 1px solid var(--border);
-            position: relative; overflow: hidden; cursor: pointer;
-            transition: all 0.35s var(--ease);
-            display: flex; flex-direction: column;
-            animation: cardFade 0.4s var(--ease) both;
-        }
-        @keyframes cardFade {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .project-card.hidden { display: none; }
-        .project-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transform: scaleX(0); transform-origin: left;
-            transition: transform 0.4s var(--ease);
-        }
-        .project-card:hover::before { transform: scaleX(1); }
-        .project-card:hover {
-            border-color: rgba(201, 162, 76, 0.5);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
-        }
-        .project-card-head {
-            display: flex; align-items: flex-start; justify-content: space-between;
-            gap: 12px; margin-bottom: 10px;
-        }
-        .project-card-icon {
-            width: 38px; height: 38px; border-radius: 10px;
-            background: rgba(11, 31, 63, 0.06);
-            color: var(--primary);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; transition: all 0.3s var(--ease);
-        }
-        .project-card:hover .project-card-icon {
-            background: var(--primary); color: var(--accent-light);
-        }
-        .project-tag-cat {
-            font-size: 0.7em; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 0.1em; color: var(--accent-dark);
-            padding: 4px 10px; border-radius: 999px;
-            background: rgba(201, 162, 76, 0.10); border: 1px solid rgba(201, 162, 76, 0.2);
-            white-space: nowrap;
-        }
-        .project-title {
-            font-size: 1.1em; font-weight: 600; color: var(--primary);
-            margin-bottom: 10px; line-height: 1.35;
-        }
-        .project-description {
-            color: var(--text-light); line-height: 1.6; font-size: 0.92em;
-            margin-bottom: 14px; flex: 1;
-        }
-        .project-tech-row { display: flex; flex-wrap: wrap; gap: 6px; }
-        .project-tech {
-            display: inline-block; background: var(--bg-soft);
-            color: var(--text); padding: 4px 11px; border-radius: 6px;
-            font-size: 0.76em; font-weight: 600;
-            border: 1px solid var(--border);
-        }
-
-        /* MODAL */
-        .modal-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(6, 15, 34, 0.62);
-            backdrop-filter: blur(8px);
-            z-index: 1000; justify-content: center; align-items: center;
-            padding: 24px; animation: modalFadeIn 0.25s ease;
-        }
-        .modal-overlay.active { display: flex; }
-        @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .modal {
-            background: var(--card-bg); border-radius: var(--radius-lg);
-            max-width: 1080px; width: 100%; max-height: 88vh; overflow: hidden;
-            box-shadow: var(--shadow-xl);
-            position: relative; animation: modalSlideIn 0.35s var(--ease);
-            display: flex; flex-direction: column;
-        }
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .modal-header {
-            padding: 32px 40px 24px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: #fff; position: relative; flex-shrink: 0;
-        }
-        .modal-header::after {
-            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-        }
-        .modal-close {
-            position: absolute; top: 18px; right: 18px;
-            width: 38px; height: 38px; border-radius: 50%; border: none;
-            background: rgba(255, 255, 255, 0.12); color: #fff;
-            cursor: pointer; transition: all 0.25s var(--ease);
-            display: flex; align-items: center; justify-content: center;
-            backdrop-filter: blur(6px);
-        }
-        .modal-close:hover { background: var(--accent); transform: rotate(90deg); }
-        .modal-icon {
-            width: 54px; height: 54px; border-radius: 14px;
-            background: rgba(255, 255, 255, 0.12);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--accent-light); margin-bottom: 14px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .modal-icon .ico { width: 28px; height: 28px; stroke-width: 1.7; }
-        .modal-title {
-            font-size: 1.65em; font-weight: 700; line-height: 1.2;
-            letter-spacing: -0.02em; max-width: 760px;
-        }
-        .modal-body {
-            display: grid; grid-template-columns: 65fr 35fr;
-            overflow-y: auto; flex: 1;
-        }
-        .modal-main { padding: 32px 40px; border-right: 1px solid var(--border); }
-        .modal-aside { padding: 32px; background: var(--bg-soft); }
-        .modal-section { margin-bottom: 26px; }
-        .modal-section:last-child { margin-bottom: 0; }
-        .modal-section h4 {
-            font-size: 0.78em; color: var(--accent-dark);
-            margin-bottom: 12px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.14em;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .modal-section h4::before {
-            content: ''; width: 18px; height: 2px; background: var(--accent); border-radius: 2px;
-        }
-        .modal-section h5 {
-            font-size: 1em; color: var(--primary); font-weight: 600;
-            margin: 14px 0 8px;
-        }
-        .modal-section p, .modal-section ul {
-            color: var(--text-light); line-height: 1.75; font-size: 0.95em;
-        }
-        .modal-section p { margin-bottom: 8px; }
-        .modal-section ul { list-style: none; padding-left: 0; }
-        .modal-section ul li {
-            padding: 5px 0 5px 22px; position: relative;
-        }
-        .modal-section ul li::before {
-            content: ''; position: absolute; left: 0; top: 14px;
-            width: 6px; height: 6px; background: var(--accent); border-radius: 2px;
-        }
-
-        /* MODAL ASIDE PROFILE CARD */
-        .meta-card { }
-        .meta-card h4 {
-            font-size: 0.72em; color: var(--accent-dark);
-            margin-bottom: 14px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.16em;
-        }
-        .meta-row {
-            padding: 12px 0; border-bottom: 1px dashed var(--border);
-        }
-        .meta-row:last-of-type { border-bottom: none; }
-        .meta-label {
-            font-size: 0.72em; font-weight: 600; color: var(--text-muted);
-            text-transform: uppercase; letter-spacing: 0.12em;
-            margin-bottom: 6px;
-        }
-        .meta-value {
-            font-size: 0.95em; color: var(--primary); font-weight: 600;
-        }
-        .meta-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .meta-tag {
-            background: var(--card-bg); color: var(--primary);
-            padding: 4px 10px; border-radius: 6px;
-            font-size: 0.78em; font-weight: 600;
-            border: 1px solid var(--border);
-        }
-        .modal-github-link {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--primary); color: #fff; padding: 11px 18px;
-            border-radius: 10px; text-decoration: none; font-weight: 600;
-            font-size: 0.88em; transition: all 0.2s var(--ease);
-            margin-top: 16px; width: 100%; justify-content: center;
-        }
-        .modal-github-link:hover {
-            background: var(--accent-dark); transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* MODAL MEDIA SHOWCASE */
-        .media-showcase {
-            margin-top: 8px;
-            border: 1.5px dashed var(--border);
-            background: repeating-linear-gradient(
-                45deg,
-                var(--bg-soft),
-                var(--bg-soft) 10px,
-                #fff 10px, #fff 20px
-            );
-            border-radius: var(--radius);
-            padding: 26px;
-        }
-        .media-showcase-head {
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 14px;
-        }
-        .media-showcase-head .ico {
-            color: var(--accent-dark);
-        }
-        .media-showcase-title {
-            font-size: 0.95em; font-weight: 600; color: var(--primary);
-        }
-        .media-showcase-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-        }
-        .media-tile {
-            aspect-ratio: 4 / 3; border-radius: 10px;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid var(--border);
-            display: flex; flex-direction: column; align-items: center;
-            justify-content: center; gap: 6px;
-            color: var(--text-muted); font-size: 0.75em; font-weight: 500;
-        }
-        .media-tile .ico { color: var(--text-muted); width: 22px; height: 22px; }
-        .media-showcase-hint {
-            font-size: 0.78em; color: var(--text-muted); margin-top: 12px;
-            text-align: center; font-style: italic;
-        }
-
-        .modal::-webkit-scrollbar,
-        .modal-body::-webkit-scrollbar { width: 6px; }
-        .modal-body::-webkit-scrollbar-track { background: transparent; }
-        .modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-        /* SKILLS */
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 22px;
-        }
-        .skills-category {
-            background: var(--bg-soft); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 22px 24px;
-            transition: all 0.3s var(--ease);
-        }
-        .skills-category:hover {
-            background: var(--card-bg); border-color: rgba(201, 162, 76, 0.4);
-            box-shadow: var(--shadow-sm); transform: translateY(-3px);
-        }
-        .skills-category h3 {
-            font-size: 0.78em; color: var(--accent-dark);
-            margin-bottom: 14px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.14em;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .skills-category h3 .ico { width: 16px; height: 16px; }
-        .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-tag {
-            background: var(--card-bg); color: var(--primary);
-            padding: 7px 14px; border-radius: 8px;
-            font-size: 0.85em; font-weight: 600;
-            border: 1px solid var(--border);
-            transition: all 0.2s var(--ease);
-        }
-        .skill-tag:hover {
-            background: var(--primary); color: #fff;
-            border-color: var(--primary); transform: translateY(-2px);
-        }
-        .modal-tech-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-        .modal-tech-list .skill-tag {
-            background: var(--bg-soft);
-            font-size: 0.8em; padding: 5px 11px;
-        }
-
-        /* EXPERIENCE / EDUCATION / ACHIEVEMENTS */
-        .timeline-item {
-            background: var(--bg-soft); border: 1px solid var(--border);
-            padding: 24px 28px; margin-bottom: 16px;
-            border-radius: var(--radius); position: relative;
-            transition: all 0.3s var(--ease);
-            border-left: 4px solid var(--accent);
-        }
-        .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-item:hover {
-            background: var(--card-bg); transform: translateX(4px);
-            box-shadow: var(--shadow-md);
-        }
-        .timeline-head {
-            display: flex; align-items: flex-start; justify-content: space-between;
-            gap: 16px; flex-wrap: wrap; margin-bottom: 6px;
-        }
-        .item-title { font-weight: 700; color: var(--primary); font-size: 1.1em; font-family: 'Sora', sans-serif; }
-        .item-period {
-            color: var(--accent-dark); font-weight: 600;
-            font-size: 0.82em; padding: 4px 12px;
-            background: rgba(201, 162, 76, 0.10);
-            border-radius: 999px; white-space: nowrap;
-            border: 1px solid rgba(201, 162, 76, 0.2);
-        }
-        .item-description { color: var(--text-light); line-height: 1.7; font-size: 0.94em; margin-top: 8px; }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 36px; }
-            .hero-portrait-wrap { order: -1; }
-            .hero-portrait { width: 240px; height: 240px; border-radius: 28px; }
-            .hero { padding: 40px 32px; }
-            .modal-body { grid-template-columns: 1fr; }
-            .modal-main { border-right: none; border-bottom: 1px solid var(--border); }
-            .media-showcase-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .container { padding: 20px 14px; }
-            .hero-wrap { padding-top: 80px; }
-            .hero { padding: 32px 22px; }
-            .section { padding: 28px 22px; }
-            .section-title { font-size: 1.35em; }
-            .nav-links { display: none; }
-            .nav-links.open {
-                display: flex; flex-direction: column; align-items: stretch;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-                padding: 12px; border-bottom: 1px solid var(--border);
-                box-shadow: var(--shadow-md);
-            }
-            .nav-toggle { display: inline-flex; }
-            .projects-grid { grid-template-columns: 1fr; gap: 16px; }
-            .modal-header { padding: 24px 24px 20px; }
-            .modal-title { font-size: 1.3em; }
-            .modal-main, .modal-aside { padding: 24px; }
-            .filter-bar { width: 100%; justify-content: flex-start; overflow-x: auto; }
-        }
-
-        @media (max-width: 560px) {
-            .nav-inner { padding: 10px 16px; gap: 8px; }
-            .nav-brand { font-size: 0.95em; }
-            .nav-brand span:last-child { display: none; }
-            .hero { padding: 28px 18px; border-radius: var(--radius); }
-            .hero h1 { font-size: clamp(1.8em, 8vw, 2.4em); }
-            .hero-headline { font-size: 1.05em; }
-            .hero-portrait { width: 200px; height: 200px; border-radius: 24px; }
-            .hero-portrait .portrait-initials { font-size: 3.4em; }
-            .contact-chips { gap: 8px; }
-            .chip { padding: 8px 12px; font-size: 0.82em; }
-            .media-showcase-grid { grid-template-columns: 1fr; }
-            .section { padding: 22px 16px; border-radius: var(--radius); }
-            .section-title { font-size: 1.2em; }
-            .modal-overlay { padding: 0; }
-            .modal-content { border-radius: 0; max-height: 100vh; height: 100vh; }
-            .modal-header { padding: 20px 18px 16px; }
-            .modal-main, .modal-aside { padding: 18px; }
-            .filter-btn { font-size: 0.82em; padding: 7px 12px; white-space: nowrap; }
-            ::-webkit-scrollbar { width: 4px; }
-        }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        .section { animation: fadeInUp 0.5s var(--ease) both; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hashin Gayasha Maharambage — Mechatronics Engineering Portfolio</title>
+<meta name="description" content="Mechatronics Engineering undergraduate at Curtin Colombo. Industrial automation, PLC/SCADA, FPGA, robotics, and embedded systems projects.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- SVG ICON SPRITE -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-        <defs>
-            <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></symbol>
-            <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
-            <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
-            <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-            <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
-            <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
-            <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
-            <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></symbol>
-            <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></symbol>
-            <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
-            <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2v6M12 16v6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M16 12h6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></symbol>
-            <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
-            <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
-            <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 4h3v3a3 3 0 0 1-3 3M7 4H4v3a3 3 0 0 0 3 3"/></symbol>
-            <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-            <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
-            <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
-            <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></symbol>
-            <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
-            <symbol id="i-chip" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></symbol>
-            <symbol id="i-thermometer" viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></symbol>
-            <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol>
-            <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.36.16.66.43.88.78.21.34.33.73.33 1.13"/></symbol>
-            <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 8.7 8.7 21.3 2.7 15.3 15.3 2.7z"/><path d="M7 17l-2-2M11 13l-2-2M15 9l-2-2M19 5l-2-2"/></symbol>
-            <symbol id="i-robot" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><circle cx="8.5" cy="14" r="1.5"/><circle cx="15.5" cy="14" r="1.5"/><path d="M12 8V4M9 4h6"/></symbol>
-            <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
-            <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17h14M3 17v-5l3-6h12l3 6v5"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></symbol>
-            <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M6 16V8a4 4 0 0 1 4-4h4M18 8v8a4 4 0 0 1-4 4h-4"/></symbol>
-            <symbol id="i-map" viewBox="0 0 24 24"><path d="M1 6v16l7-3 8 3 7-3V3l-7 3-8-3-7 3z"/><path d="M9 3v15M16 6v15"/></symbol>
-            <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
-            <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
-            <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
-            <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 12h2l3-9 4 18 3-9h8"/></symbol>
-            <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7l10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
-            <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
-            <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
-            <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
-        </defs>
-    </svg>
+<a class="skip-link" href="#main">Skip to content</a>
 
-    <nav class="navbar">
-        <div class="nav-inner">
-            <a href="#top" class="nav-brand">
-                <span class="nav-brand-mark">HM</span>
-                <span>Hashin Maharambage</span>
-            </a>
-            <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
-                <svg class="ico"><use href="#i-menu"/></svg>
-            </button>
-            <div class="nav-links" id="navLinks">
-                <a href="#about" class="nav-link" onclick="closeNav()">About</a>
-                <a href="#projects" class="nav-link" onclick="closeNav()">Projects</a>
-                <a href="#experience" class="nav-link" onclick="closeNav()">Experience</a>
-                <a href="#skills" class="nav-link" onclick="closeNav()">Skills</a>
-                <a href="#achievements" class="nav-link" onclick="closeNav()">Achievements</a>
-                <a href="#education" class="nav-link" onclick="closeNav()">Education</a>
-            </div>
-            <div class="nav-actions">
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark">
-                    <svg class="ico ico-sun"><use href="#i-sun"/></svg>
-                    <svg class="ico ico-moon"><use href="#i-moon"/></svg>
-                </button>
-            </div>
-        </div>
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">
+      <span class="nav-brand-mark">HM</span>
+      <span>Hashin Maharambage</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a class="nav-link" href="#about" data-navlink>About</a>
+      <a class="nav-link" href="#experience" data-navlink>Experience</a>
+      <a class="nav-link" href="#projects" data-navlink>Projects</a>
+      <a class="nav-link" href="#skills" data-navlink>Skills</a>
+      <a class="nav-link" href="#education" data-navlink>Education</a>
+      <a class="nav-link" href="#achievements" data-navlink>Achievements</a>
+      <a class="nav-link nav-link-cta" href="#contact" data-navlink>Contact</a>
     </nav>
 
-    <div class="container hero-wrap" id="top">
-        <section class="hero">
-            <div class="hero-grid">
-                <div class="hero-text">
-                    <div class="hero-eyebrow">Engineering Portfolio · 2026</div>
-                    <h1>Hashin Gayasha<br>Maharambage</h1>
-                    <p class="hero-headline">Mechatronics Engineering Student <span class="accent">— Curtin University</span></p>
-                    <p class="hero-bio">Enthusiastic third-year undergraduate building at the intersection of mechanical design, embedded systems, and industrial automation — from FPGAs and PLCs to CAD-driven hardware prototypes.</p>
-                    <div class="contact-chips">
-                        <a href="tel:+94776166691" class="chip"><svg class="ico"><use href="#i-phone"/></svg>+94 77 616 6691</a>
-                        <a href="mailto:hashingayasha.tc@gmail.com" class="chip"><svg class="ico"><use href="#i-mail"/></svg>hashingayasha.tc@gmail.com</a>
-                        <a href="https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285" class="chip" target="_blank"><svg class="ico"><use href="#i-linkedin"/></svg>LinkedIn</a>
-                        <span class="chip"><svg class="ico"><use href="#i-pin"/></svg>Mount Lavinia, Sri Lanka</span>
-                    </div>
-                </div>
-                <div class="hero-portrait-wrap">
-                    <div class="hero-portrait-ring"></div>
-                    <div class="hero-portrait">
-                        <!-- Replace src below with your LinkedIn headshot URL -->
-                        <!-- <img src="YOUR_LINKEDIN_HEADSHOT_URL_HERE" alt="Hashin Maharambage"> -->
-                        <img src="563A6831.JPG" alt="Hashin Maharambage">
-                    </div>
-                    <div class="hero-portrait-badge">
-                        <span class="dot"></span> Open to opportunities
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="about">
-            <div class="section-head">
-                <div class="section-icon"><svg class="ico ico-section"><use href="#i-user"/></svg></div>
-                <div>
-                    <span class="section-eyebrow">Profile</span>
-                    <h2 class="section-title">About Me</h2>
-                </div>
-            </div>
-            <div class="about-content">
-                <p>As an undergraduate in Mechatronics Engineering at Curtin Colombo (Sri Lanka Branch of Curtin University Australia), I specialize in utilizing my skills in Python, C++, C, Ladder logic programming, CAD drawings, and PCB design 
-                    to develop and design innovative engineering solutions that cater to a wide range of industries. My technical foundation is built on practical application, maintaining a strong academic track record. Driven by a growth mindset, 
-                    my current learning interests focus on deepening my expertise in Machine Learning/AI and advanced PCB designing.</p>
-                <div class="highlight-box">
-                    <svg class="ico"><use href="#i-award"/></svg>
-                    Course Weighted Average: 79.59%
-                </div>
-                <p>My technical capabilities are heavily reinforced by hands-on industry experience. Having worked as an Engineering Intern at Ansell Lanka and an R&D Intern Engineer at C3 Labs Pvt Ltd, I have gained valuable insight into the importance of strong work ethics and acute attention to detail. 
-                    These roles have refined my abilities to work under pressure, manage urgent deliverables, and consistently meet tight deadlines.</p>
-                <p>Beyond individual execution, my strengths in team collaboration and presentation skills allow me to effectively communicate complex technical concepts and implement project objectives alongside multidisciplinary teams. This collaborative mindset is further demonstrated through my leadership 
-                    roles in student governance and societies, including serving as the Assistant Treasurer for the Curtin Colombo Student Guild and President of the Photographic Society. I am highly motivated to continue expanding my skillset and utilizing my knowledge to drive success, efficiency, and growth within the engineering industry.</p>
-            </div>
-        </section>
-
-        <section class="section" id="projects">
-            <div class="section-head">
-                <div class="section-icon"><svg class="ico ico-section"><use href="#i-grid"/></svg></div>
-                <div>
-                    <span class="section-eyebrow">Selected Work</span>
-                    <h2 class="section-title">Projects</h2>
-                </div>
-            </div>
-
-            <div class="filter-bar" role="tablist">
-                <button class="filter-btn active" data-filter="all" onclick="filterProjects('all', this)">All <span class="count">13</span></button>
-                <button class="filter-btn" data-filter="work" onclick="filterProjects('work', this)">Work-Related <span class="count">5</span></button>
-                <button class="filter-btn" data-filter="university" onclick="filterProjects('university', this)">University <span class="count">5</span></button>
-                <button class="filter-btn" data-filter="personal" onclick="filterProjects('personal', this)">Personal <span class="count">3</span></button>
-            </div>
-
-            <h3 class="project-category-label" data-cat-label="work">Work-Related Projects</h3>
-            <div class="projects-grid">
-                <div class="project-card" data-category="work" onclick="openModal('modal-aqm')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-thermometer"/></svg></div>
-                        <span class="project-tag-cat">Work</span>
-                    </div>
-                    <h3 class="project-title">Air Quality Monitoring (AQM) Devices</h3>
-                    <p class="project-description">Developed C++ software for e-paper displays and carried out regular maintenance of AQM devices to ensure accurate performance during internship.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">C++</span><span class="project-tech">E-paper Display</span><span class="project-tech">IoT</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="work" onclick="openModal('modal-qr')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-card"/></svg></div>
-                        <span class="project-tag-cat">Work</span>
-                    </div>
-                    <h3 class="project-title">QR Code Scanning — BLE Self-Payment System</h3>
-                    <p class="project-description">Implemented BLE-based self-payment systems, enabling secure and efficient QR code scanning for seamless transaction processing.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">BLE</span><span class="project-tech">QR Code</span><span class="project-tech">Flutter</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="work" onclick="openModal('modal-bpe')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-gear"/></svg></div>
-                        <span class="project-tag-cat">Work</span>
-                    </div>
-                    <h3 class="project-title">Automation of BPE Folding Machine</h3>
-                    <p class="project-description">Automated folding mechanism for Body Protective Equipment built from scratch to replace manual labor and improve efficiency using Omron PLC.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Omron CP1E</span><span class="project-tech">CX Programmer</span><span class="project-tech">Pneumatics</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="work" onclick="openModal('modal-reverse')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-ruler"/></svg></div>
-                        <span class="project-tag-cat">Work</span>
-                    </div>
-                    <h3 class="project-title">Reverse Engineering of Industrial Components and Systems</h3>
-                    <p class="project-description">Reverse-engineered a Ven Pack machine frame and linear actuator setup to generate accurate CAD profiles and select component motors.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">SolidWorks</span><span class="project-tech">CAD Layouts</span><span class="project-tech">Calculations</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="work" onclick="openModal('modal-cobot')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-robot"/></svg></div>
-                        <span class="project-tag-cat">Work</span>
-                    </div>
-                    <h3 class="project-title">Cobot Programming — DOBOT CR12A</h3>
-                    <p class="project-description">Programmed a Dobot robot using the teaching pendant for pick-and-place tray tasks with coordinated PLC data register control.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">DOBOT CR12A</span><span class="project-tech">PLC Integration</span><span class="project-tech">Registers</span>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="project-category-label" data-cat-label="university">University Projects</h3>
-            <div class="projects-grid">
-                <div class="project-card" data-category="university" onclick="openModal('modal-microcontroller')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-mobile"/></svg></div>
-                        <span class="project-tag-cat">University</span>
-                    </div>
-                    <h3 class="project-title">Microcontroller Project — Dual-Mode Robotic Car</h3>
-                    <p class="project-description">Designed a dual-mode robotic car with autonomous maze navigation using ESP32-CAM and manual Bluetooth control via HC-05.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">ESP32-CAM</span><span class="project-tech">HC-05</span><span class="project-tech">Robotics</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="university" onclick="openModal('modal-linefollowing')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-car"/></svg></div>
-                        <span class="project-tag-cat">University</span>
-                    </div>
-                    <h3 class="project-title">Line-Following Cart</h3>
-                    <p class="project-description">An Arduino Nano based tracking cart utilizing analog PWM circuits and a custom Python GUI overlay for real-time sensor plotting.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Arduino Nano</span><span class="project-tech">Analog Circuits</span><span class="project-tech">Python GUI</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="university" onclick="openModal('modal-crazy')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-chip"/></svg></div>
-                        <span class="project-tag-cat">University</span>
-                    </div>
-                    <h3 class="project-title">Advanced Digital Design Project — Automated Crazy Machine</h3>
-                    <p class="project-description">Fully automated electromechanical setup transporting a steel ball through a bank robbery sequence handled via VHDL state logic.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Altera FPGA</span><span class="project-tech">VHDL FSM</span><span class="project-tech">SolidWorks</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="university" onclick="openModal('modal-avms')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-route"/></svg></div>
-                        <span class="project-tag-cat">University</span>
-                    </div>
-                    <h3 class="project-title">Autonomous Vehicle Management System</h3>
-                    <p class="project-description">Utilizing data structures and algorithms in Python to create a comprehensive management system for autonomous vehicles.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Python</span><span class="project-tech">Data Structures</span><span class="project-tech">Algorithms</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="university" onclick="openModal('modal-road')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-map"/></svg></div>
-                        <span class="project-tag-cat">University</span>
-                    </div>
-                    <h3 class="project-title">Road Structure Solution</h3>
-                    <p class="project-description">First-year project designing solutions for Saibai Island muddy roads as requested by Australian engineers.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Civil Solutions</span><span class="project-tech">Management</span><span class="project-tech">Writing</span>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="project-category-label" data-cat-label="personal">Personal Projects</h3>
-            <div class="projects-grid">
-                <div class="project-card" data-category="personal" onclick="openModal('modal-plc-scada')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-sliders"/></svg></div>
-                        <span class="project-tag-cat">Personal</span>
-                    </div>
-                    <h3 class="project-title">PLC Project Involving SCADA</h3>
-                    <p class="project-description">Automated a chemical treatment process system running sequence loops from WinCC SCADA and hardware panels.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Siemens S7-400</span><span class="project-tech">WinCC Flexible</span><span class="project-tech">SCADA</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="personal" onclick="openModal('modal-elevator')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-building"/></svg></div>
-                        <span class="project-tag-cat">Personal</span>
-                    </div>
-                    <h3 class="project-title">3 Level Elevator Model</h3>
-                    <p class="project-description">Automated a physical 3-level scale elevator utilizing precise sequential execution logic maps triggered by terminal pushbuttons.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">PLC logic</span><span class="project-tech">Ladder Logic</span><span class="project-tech">Automation</span>
-                    </div>
-                </div>
-                <div class="project-card" data-category="personal" onclick="openModal('modal-obstacle')">
-                    <div class="project-card-head">
-                        <div class="project-card-icon"><svg class="ico"><use href="#i-rocket"/></svg></div>
-                        <span class="project-tag-cat">Personal</span>
-                    </div>
-                    <h3 class="project-title">Obstacle Avoiding Vehicle</h3>
-                    <p class="project-description">Arduino-based obstacle-avoiding vehicle using ultrasonic sensors for detection and PID control for stable motor navigation.</p>
-                    <div class="project-tech-row">
-                        <span class="project-tech">Arduino</span><span class="project-tech">Ultrasonic Sensor</span><span class="project-tech">PID Control</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="experience">
-            <div class="section-head">
-                <div class="section-icon"><svg class="ico ico-section"><use href="#i-briefcase"/></svg></div>
-                <div>
-                    <span class="section-eyebrow">Industry</span>
-                    <h2 class="section-title">Work Experience</h2>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">Engineering Intern</div>
-                    <div class="item-period">Nov 2025 – Feb 2026</div>
-                </div>
-                <div class="item-period" style="display:inline-block; background:transparent; border:none; padding:0; color:var(--accent-dark);">Ansell Lanka</div>
-                <div class="item-description">Gained practical engineering experience in an industrial manufacturing environment by contributing to automation and mechanical design activities. Worked on PLC-based control systems, assisting with programming, troubleshooting, and automation-related tasks to improve operational efficiency. Developed and modified mechanical designs using SolidWorks, creating and refining components and assemblies to support engineering requirements. Collaborated with engineers and technical teams to solve problems, implement improvements, and deliver solutions within project timelines. This internship strengthened my skills in industrial automation, CAD design, problem-solving, and applying engineering concepts in a real-world manufacturing setting.</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">Research and Development Intern</div>
-                    <div class="item-period">Nov 2024 – Feb 2025</div>
-                </div>
-                <div class="item-period" style="display:inline-block; background:transparent; border:none; padding:0; color:var(--accent-dark);">C3 Labs</div>
-                <div class="item-description">Contributed to multiple projects by taking responsibility for urgent deliverables and consistently meeting tight deadlines. Frequently worked overtime to ensure timely completion, while collaborating effectively with team members and senior employees to achieve project goals. This experience strengthened my ability to deliver high-quality results under pressure in a team-oriented environment.</div>
-            </div>
-        </section>
-
-        <section class="section" id="skills">
-            <div class="section-head">
-                <div class="section-icon"><svg class="ico ico-section"><use href="#i-cpu"/></svg></div>
-                <div>
-                    <span class="section-eyebrow">Capabilities</span>
-                    <h2 class="section-title">Skills</h2>
-                </div>
-            </div>
-            <div class="skills-grid">
-                <div class="skills-category">
-                    <h3><svg class="ico"><use href="#i-bolt"/></svg>Technical Skills</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">SolidWorks</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">MATLAB</span>
-                        <span class="skill-tag">Python</span><span class="skill-tag">C++</span><span class="skill-tag">PLC Programming</span>
-                        <span class="skill-tag">Photoshop</span>
-                    </div>
-                </div>
-                <div class="skills-category">
-                    <h3><svg class="ico"><use href="#i-spark"/></svg>Soft Skills</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">Teamwork</span><span class="skill-tag">Adaptability</span>
-                        <span class="skill-tag">Leadership</span><span class="skill-tag">Time Management</span>
-                    </div>
-                </div>
-                <div class="skills-category">
-                    <h3><svg class="ico"><use href="#i-globe"/></svg>Languages</h3>
-                    <div class="skills-list">
-                        <span class="skill-tag">English</span><span class="skill-tag">Sinhala</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="achievements">
-            <div class="section-head">
-                <div class="section-icon"><svg class="ico ico-section"><use href="#i-trophy"/></svg></div>
-                <div>
-                    <span class="section-eyebrow">Recognition</span>
-                    <h2 class="section-title">Key Achievements</h2>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">President — Photographic Society of Thurstan College</div>
-                    <div class="item-period">2020 – 2021</div>
-                </div>
-                <div class="item-description">Collaborated with colleagues to organize events and manage junior members of the society, developing leadership and organizational skills.</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">Assistant Treasurer — Curtin Colombo Student Guild</div>
-                    <div class="item-period">2024 – 2025</div>
-                </div>
-                <div class="item-description">Managing financial responsibilities and contributing to student governance activities at university level.</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">PLC Programming Certification — SLIR Institute</div>
-                    <div class="item-period">Certified</div>
-                </div>
-                <div class="item-description">Completed industry-focused PLC programming training covering automation systems, HMI/SCADA development, motor controls, and hands-on experience with Siemens, Mitsubishi, and Xinje PLC platforms.</div>
-            </div>
-        </section>
-
-        <section class="section" id="education">
-            <div class="section-head">
-                <div class="section-icon"><svg class="ico ico-section"><use href="#i-cap"/></svg></div>
-                <div>
-                    <span class="section-eyebrow">Academics</span>
-                    <h2 class="section-title">Education</h2>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">Bachelor of Engineering (Honours) in Mechatronics Engineering</div>
-                    <div class="item-period">Jul 2023 – Jun 2027</div>
-                </div>
-                <div class="item-period" style="display:inline-block; background:transparent; border:none; padding:0; color:var(--accent-dark);">Curtin Colombo (Sri Lanka Branch of Curtin University Australia)</div>
-                <div class="item-description">Third Year Undergraduate (Reading) with 79.59% Course Weighted Average. Gaining comprehensive knowledge in mechatronics systems, automation, robotics, and control systems.</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-head">
-                    <div class="item-title">G.C.E. Advanced Level & Ordinary Level</div>
-                    <div class="item-period">Jan 2009 – Jan 2022</div>
-                </div>
-                <div class="item-period" style="display:inline-block; background:transparent; border:none; padding:0; color:var(--accent-dark);">Thurstan College, Colombo</div>
-                <div class="item-description"><strong>A/L:</strong> Combined Mathematics (B), Physics (C), Chemistry (C)<br><strong>O/L:</strong> Outstanding results with distinctions in Mathematics, Science, Buddhism, History, English Language, Sinhala Language, Commerce, English Literature, and Information Technology.</div>
-            </div>
-        </section>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="ico ico-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="ico ico-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <svg class="ico ico-lg icon-burger" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="ico ico-lg icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
     </div>
+  </div>
+</header>
 
-    <!-- ============= MODALS ============= -->
+<div class="nav-backdrop" id="navBackdrop"></div>
 
-    <div id="modal-aqm" class="modal-overlay" onclick="closeModalOutside(event, 'modal-aqm')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-aqm')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-thermometer"/></svg></div>
-                <h2 class="modal-title">Air Quality Monitoring (AQM) Devices</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Developed C++ software for e-paper displays and carried out regular maintenance of AQM devices to ensure accurate and reliable performance during internship period.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Work-Related · Internship</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2024 – 2025</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">C++</span><span class="meta-tag">E-paper Display</span><span class="meta-tag">IoT</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+<main id="main" class="hero-wrap">
+  <div class="container">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">Engineering Portfolio · 2026</span>
+          <h1>Hashin Gayasha<br>Maharambage</h1>
+          <p class="hero-headline">Mechatronics Engineering Student — <span class="accent">Curtin University Colombo</span></p>
+          <p class="hero-bio">Third-year undergraduate building at the intersection of mechanical design, embedded systems, and industrial automation — from FPGAs and PLCs to CAD-driven hardware prototypes. Currently open to internship and graduate opportunities.</p>
+
+          <div class="contact-chips">
+            <a class="chip chip-primary" href="#contact">
+              <svg class="ico" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M3 6h18v12H3z"/></svg>
+              Contact Me
+            </a>
+            <a class="chip" href="resume.pdf" download>
+              <svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Download Résumé
+            </a>
+            <a class="chip" href="https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285" target="_blank" rel="noopener">
+              <svg class="ico" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+              LinkedIn
+            </a>
+          </div>
         </div>
-    </div>
 
-    <div id="modal-qr" class="modal-overlay" onclick="closeModalOutside(event, 'modal-qr')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-qr')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-card"/></svg></div>
-                <h2 class="modal-title">QR Code Scanning — BLE Self-Payment System</h2>
+        <div class="hero-portrait-wrap">
+          <div class="hero-portrait-ring"></div>
+          <div class="hero-portrait">
+            <img src="563A6831.JPG" alt="Portrait of Hashin Maharambage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="portrait-placeholder" style="display:none;">
+              <div class="portrait-initials">HM</div>
+              <div class="portrait-hint">Add 563A6831.JPG to repo root</div>
             </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Implemented BLE-based self-payment systems, enabling secure and efficient QR code scanning for seamless transaction processing without requiring active client internet infrastructures.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Work-Related · Internship</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2024 – 2025</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">BLE</span><span class="meta-tag">QR Code</span><span class="meta-tag">Flutter</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+          </div>
+          <div class="hero-portrait-badge">
+            <span class="dot"></span> Open to opportunities
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <div id="modal-bpe" class="modal-overlay" onclick="closeModalOutside(event, 'modal-bpe')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-bpe')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-gear"/></svg></div>
-                <h2 class="modal-title">Automation of BPE Folding Machine</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Problem</h4>
-                        <ul>
-                            <li>The BPE (Body Protective Equipment) folding process was heavily dependent on manual labour.</li>
-                            <li>Manual folding resulted in lower efficiency, inconsistent output, and higher labour requirements.</li>
-                            <li>The Global Engineering and Manufacturing Technology Department identified the necessity for an automated folding mechanism.</li>
-                            <li>Since no previous machine designs existed, the system had to be built from scratch.</li>
-                        </ul>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Solution and Outcome</h4>
-                        <ul>
-                            <li>Worked on the project from the concept stage to completion.</li>
-                            <li>Helped design the mechanical system and supported prototype building and assembly.</li>
-                            <li>Developed the control system using an Omron CP1E PLC and CX Programmer.</li>
-                            <li>Added a soft-start pneumatic valve to pressurise the system and improve safety during startup slowly.</li>
-                            <li>Installed and wired limit switches for the BPE folding bed.</li>
-                            <li>Installed pneumatic tubing between valves and actuators for the folding system.</li>
-                            <li>Installed 20 reed switches for 10 pneumatic actuators and connected them to PLC inputs for position monitoring.</li>
-                            <li>Set up RS-232 communication between the PLC and HMI.</li>
-                            <li>Designed and programmed the HMI using Kinco HMI Ware, including Auto/Manual modes, Start/Stop, Home position, and Emergency Stop.</li>
-                            <li>Performed testing, troubleshooting, and final commissioning of the machine.</li>
-                        </ul>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Work-Related · Industrial Automation</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2025 – 2026</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">Omron CP1E</span><span class="meta-tag">CX Programmer</span><span class="meta-tag">Pneumatics</span><span class="meta-tag">Kinco HMI</span><span class="meta-tag">RS-232</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Proprietary / Internal</div></div>
-                </aside>
-            </div>
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <div class="section-head">
+        <div class="section-icon"><svg class="ico-section" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+        <div>
+          <span class="section-eyebrow">Profile</span>
+          <h2 class="section-title">About Me</h2>
         </div>
-    </div>
+      </div>
+      <div class="about-content">
+        <p>As an undergraduate in Mechatronics Engineering at Curtin Colombo (Sri Lanka Branch of Curtin University Australia), I specialise in Python, C++, C, ladder logic programming, CAD drawing, and PCB design to develop engineering solutions across a range of industries. My technical foundation is built on practical application, backed by a strong academic track record.</p>
 
-    <div id="modal-reverse" class="modal-overlay" onclick="closeModalOutside(event, 'modal-reverse')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-reverse')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-ruler"/></svg></div>
-                <h2 class="modal-title">Reverse Engineering of Industrial Components and Systems</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Ven Pack Machine</h4>
-                        <ul>
-                            <li>Reverse-engineered the frame of an existing Ven Pack machine.</li>
-                            <li>Took precise measurements from the real machine to create the frame design.</li>
-                            <li>Verified sheet metal coverings against the designed frame to ensure correct dimensions.</li>
-                            <li>Developed accurate drawings and layouts based on collected data.</li>
-                            <li>Gained hands-on experience in industrial machine design and measurement.</li>
-                        </ul>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Linear Actuator Setup</h4>
-                        <ul>
-                            <li>Reverse-engineered an existing linear actuator setup.</li>
-                            <li>Took measurements to understand actuator dimensions and motor placement.</li>
-                            <li>Designed a motor mounting bracket based on the actuator geometry.</li>
-                            <li>Conducted lead screw calculation for motor selection for this linear actuator.</li>
-                        </ul>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Work-Related · Mechanical Design</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2025 – 2026</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">SolidWorks</span><span class="meta-tag">CAD Layouts</span><span class="meta-tag">Calculations</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Proprietary / Internal</div></div>
-                </aside>
-            </div>
+        <div class="highlight-box">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          Course Weighted Average: 79.59%
         </div>
-    </div>
 
-    <div id="modal-cobot" class="modal-overlay" onclick="closeModalOutside(event, 'modal-cobot')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-cobot')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-robot"/></svg></div>
-                <h2 class="modal-title">Cobot Programming — DOBOT CR12A</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Technical Scope</h4>
-                        <ul>
-                            <li>Programmed the Dobot robot using the teaching pendant, including tray functions for pick-and-place tasks.</li>
-                            <li>Created subroutines to handle repeated actions and simplify programming.</li>
-                            <li>Configured input/output signals between the robot and PLC for automated control.</li>
-                            <li>Used holding registers to send and receive data with the PLC.</li>
-                            <li>Performed testing, debugging, and final commissioning.</li>
-                        </ul>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Work-Related · Robotics</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2025 – 2026</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">DOBOT CR12A</span><span class="meta-tag">PLC Integration</span><span class="meta-tag">Registers</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Proprietary / Internal</div></div>
-                </aside>
-            </div>
+        <p>My technical capabilities are reinforced by hands-on industry experience. Having worked as an Engineering Intern at Ansell Lanka and an R&amp;D Intern Engineer at C3 Labs, I've gained insight into strong work ethics and attention to detail — skills that translate into working well under pressure and meeting tight deadlines.</p>
+        <p>Beyond individual execution, I bring strengths in team collaboration and presentation, demonstrated through leadership roles including Assistant Treasurer for the Curtin Colombo Student Guild and President of the Photographic Society. I'm motivated to keep expanding my skillset — currently deepening expertise in Machine Learning/AI and advanced PCB design.</p>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE (moved above projects) ============ -->
+    <section class="section" id="experience">
+      <div class="section-head">
+        <div class="section-icon"><svg class="ico-section" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div>
+        <div>
+          <span class="section-eyebrow">Industry</span>
+          <h2 class="section-title">Work Experience</h2>
         </div>
-    </div>
+      </div>
 
-    <div id="modal-microcontroller" class="modal-overlay" onclick="closeModalOutside(event, 'modal-microcontroller')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-microcontroller')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-mobile"/></svg></div>
-                <h2 class="modal-title">Microcontroller Project — Dual-Mode Robotic Car</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Designed and developed a dual-mode car capable of operating in both autonomous and manual control modes.</p>
-                        <h5>Key Features:</h5>
-                        <p>Autonomous Mode:</p>
-                        <ul><li>Equipped with an ESP32-CAM module for visual input, the car is programmed to navigate and solve mazes autonomously using embedded logic.</li></ul>
-                        <p>Manual Mode:</p>
-                        <ul><li>Controlled wirelessly via Bluetooth (HC-05) using an external controller, enabling full user navigation in real time.</li></ul>
-                        <h5>Technical Stack:</h5>
-                        <ul>
-                            <li>Microcontrollers: ESP32-CAM, Arduino Mega</li>
-                            <li>Communication: HC-05 Bluetooth Module</li>
-                            <li>Programming Language: C</li>
-                            <li>Real-time data processing and control logic for maze-solving algorithms</li>
-                        </ul>
-                        <h5>Applications:</h5>
-                        <ul>
-                            <li>Embedded systems experimentation</li>
-                            <li>Autonomous navigation</li>
-                            <li>Wireless robotics control</li>
-                        </ul>
-                        <p>This project demonstrates practical integration of vision-based automation with remote manual override, showcasing skills in embedded programming, 
-                            Bluetooth communication, and real-time robotic control.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">University · Microcontroller Coursework</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2025</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">ESP32-CAM</span><span class="meta-tag">HC-05</span><span class="meta-tag">Robotics</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">Engineering Intern · Ansell Lanka</span>
+          <span class="item-period">Nov 2025 – Feb 2026</span>
         </div>
-    </div>
+        <p class="item-description">Contributed to automation and mechanical design activities in an industrial manufacturing environment. Worked on PLC-based control systems — programming, troubleshooting, and automation tasks to improve operational efficiency. Developed and modified mechanical designs in SolidWorks, refining components and assemblies to support engineering requirements. Strengthened skills in industrial automation, CAD design, and applying engineering concepts in a real-world manufacturing setting.</p>
+      </div>
 
-    <div id="modal-linefollowing" class="modal-overlay" onclick="closeModalOutside(event, 'modal-linefollowing')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-linefollowing')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-car"/></svg></div>
-                <h2 class="modal-title">Line-Following Cart</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Update</h4>
-                        <p>Just wrapped up my Line-Following Cart project!</p>
-                        <p>It combines:</p>
-                        <ul>
-                            <li>Arduino Nano for real-time Bang-Bang control</li>
-                            <li>DAC + LM741 + LM339 + 555 Timer circuit for analog PWM generation</li>
-                            <li>Python GUI for live control and sensor visualisation</li>
-                        </ul>
-                        <p>Achieved smooth bidirectional motion, stable tracking, and responsive feedback — a great hands-on integration of control theory and embedded electronics.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">University · Control Systems</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2025</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">Arduino Nano</span><span class="meta-tag">Analog Circuits</span><span class="meta-tag">Python GUI</span><span class="meta-tag">555 Timer</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div>
-                        <a class="modal-github-link" href="https://github.com/Hashin2003/Line-Following-Cart.git" target="_blank"><svg class="ico"><use href="#i-github"/></svg>View on GitHub</a>
-                    </div>
-                </aside>
-            </div>
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">Research &amp; Development Intern · C3 Labs</span>
+          <span class="item-period">Nov 2024 – Feb 2025</span>
         </div>
-    </div>
+        <p class="item-description">Took ownership of urgent deliverables and consistently met tight deadlines across multiple projects, frequently working overtime to ensure timely completion while collaborating closely with senior engineers. Strengthened the ability to deliver high-quality results under pressure in a team-oriented environment.</p>
+      </div>
+    </section>
 
-    <div id="modal-crazy" class="modal-overlay" onclick="closeModalOutside(event, 'modal-crazy')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-crazy')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-chip"/></svg></div>
-                <h2 class="modal-title">Advanced Digital Design Project — Automated Crazy Machine</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Designed and developed a fully automated electromechanical Crazy Machine module that transports a steel ball through a themed bank robbery sequence without human intervention. The system combines FPGA-based control, embedded systems, mechanical design, and automation to execute a complex sequence involving elevators, doors, vault mechanisms, and a final escape system. The machine was controlled using an Altera FPGA running a VHDL-based finite state machine (FSM), with an Arduino Mega supporting additional I/O functions such as OLED display control and motor operation.</p>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Technical Highlights</h4>
-                        <h5>FPGA-Based Automation Control</h5>
-                        <ul>
-                            <li>Developed a complete autonomous control system using VHDL on an Altera FPGA development board.</li>
-                            <li>Implemented a finite state machine architecture to coordinate sensor inputs, timing sequences, and actuator outputs.</li>
-                            <li>Designed modular VHDL controllers for servo motors, stepper motors, elevators, doors, buzzer, and retrieval mechanisms.</li>
-                            <li>Used sensor feedback and timed state transitions to ensure each mechanism operated in the correct sequence.</li>
-                        </ul>
-                        <h5>Mechanical System Design</h5>
-                        <p>Designed and integrated a compact 40cm × 40cm × 40cm mechanical system consisting of:</p>
-                        <ul>
-                            <li>Dual elevator mechanisms</li>
-                            <li>Servo-controlled doors</li>
-                            <li>Maze pathways</li>
-                            <li>Vault section</li>
-                            <li>Electromagnet retrieval mechanism</li>
-                            <li>Final DC motor escape mechanism</li>
-                        </ul>
-                        <p>Created custom mechanical components using SolidWorks and manufactured precision parts using 3D printing. Improved mechanical reliability through CAD-based validation, alignment testing, and iterative design improvements.</p>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Sensor and Actuator Integration</h4>
-                        <p><strong>Sensors:</strong></p>
-                        <ul>
-                            <li>IR sensors for ball detection</li>
-                            <li>LDR + laser system for optical detection</li>
-                            <li>Limit switches for elevator position feedback</li>
-                        </ul>
-                        <p><strong>Actuators:</strong></p>
-                        <ul>
-                            <li>NEMA 17 stepper motors for elevator movement</li>
-                            <li>Servo motors for doors and mechanical mechanisms</li>
-                            <li>Electromagnet for object retrieval</li>
-                            <li>N20 DC motor for final output mechanism</li>
-                        </ul>
-                        <p>High-current devices were controlled through dedicated driver circuits to protect the FPGA and ensure reliable operation.</p>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Challenges &amp; Solutions</h4>
-                        <ul>
-                            <li><strong>Challenge:</strong> Sensor false triggering during initial detection.<br><em>Solution:</em> Replaced the vibration sensor with an IR sensor system to improve reliability and prevent unwanted activation caused by external disturbances.</li>
-                            <li><strong>Challenge:</strong> Unstable elevator movement and stepper control.<br><em>Solution:</em> Corrected motor wiring issues and implemented 1/16 microstepping using A4988 drivers to achieve smoother and more accurate elevator movement.</li>
-                        </ul>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Outcome</h4>
-                        <p>Successfully developed and demonstrated a fully autonomous Crazy Machine system capable of transporting the steel ball through the complete bank robbery sequence within the required operating time. The final system integrated mechanical design, FPGA-based digital control, sensor feedback, and embedded programming into a reliable automated platform. The project strengthened practical experience in FPGA development, automation, CAD modelling, electromechanical integration, and system-level debugging.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">University · Advanced Digital Design</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2025</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div>
-                        <div class="meta-tags">
-                            <span class="meta-tag">Altera DE1 FPGA</span><span class="meta-tag">VHDL</span><span class="meta-tag">FSM Design</span><span class="meta-tag">Arduino Mega</span><span class="meta-tag">SolidWorks</span><span class="meta-tag">3D Printing</span><span class="meta-tag">NEMA 17</span><span class="meta-tag">A4988</span><span class="meta-tag">IR Sensors</span>
-                        </div>
-                    </div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Coursework — not publicly hosted</div></div>
-                </aside>
-            </div>
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div class="section-icon"><svg class="ico-section" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <div>
+          <span class="section-eyebrow">Selected Work</span>
+          <h2 class="section-title">Projects</h2>
         </div>
-    </div>
+      </div>
 
-    <div id="modal-avms" class="modal-overlay" onclick="closeModalOutside(event, 'modal-avms')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-avms')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-route"/></svg></div>
-                <h2 class="modal-title">Autonomous Vehicle Management System</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Utilizing data structures and algorithms in Python to create a comprehensive management system for autonomous vehicle tracking, routing matrix arrays, and speed control optimization blocks.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">University · Software / Algorithms</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2024</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">Python</span><span class="meta-tag">Data Structures</span><span class="meta-tag">Algorithms</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+      <!-- Featured strip -->
+      <p class="featured-label">Featured</p>
+      <div class="featured-grid">
+        <button class="featured-card" type="button" data-modal="modal-crazy-machine" aria-haspopup="dialog">
+          <span class="project-tag-cat">University</span>
+          <h3 class="featured-title">Automated Crazy Machine — FPGA + VHDL</h3>
+          <p class="featured-desc">Fully automated electromechanical system transporting a steel ball through a multi-stage sequence, controlled by a VHDL finite state machine on an Altera FPGA.</p>
+          <span class="featured-cta">View case study <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="featured-card" type="button" data-modal="modal-bpe" aria-haspopup="dialog">
+          <span class="project-tag-cat">Work-Related</span>
+          <h3 class="featured-title">Automation of BPE Folding Machine</h3>
+          <p class="featured-desc">Built from scratch: PLC-controlled folding mechanism replacing manual labour, including pneumatics, HMI, and full commissioning.</p>
+          <span class="featured-cta">View case study <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+        <button class="featured-card" type="button" data-modal="modal-dobot" aria-haspopup="dialog">
+          <span class="project-tag-cat">Work-Related</span>
+          <h3 class="featured-title">Cobot Programming — DOBOT CR12A</h3>
+          <p class="featured-desc">Programmed an industrial cobot for pick-and-place tasks with coordinated PLC register control.</p>
+          <span class="featured-cta">View case study <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+      </div>
+
+      <div class="filter-bar" role="tablist" aria-label="Filter projects by category">
+        <button class="filter-btn active" type="button" role="tab" aria-selected="true" data-filter="all">All <span class="count">13</span></button>
+        <button class="filter-btn" type="button" role="tab" aria-selected="false" data-filter="work">Work-Related <span class="count">5</span></button>
+        <button class="filter-btn" type="button" role="tab" aria-selected="false" data-filter="university">University <span class="count">5</span></button>
+        <button class="filter-btn" type="button" role="tab" aria-selected="false" data-filter="personal">Personal <span class="count">3</span></button>
+      </div>
+
+      <h3 class="project-category-label" data-cat-label="work">Work-Related Projects</h3>
+      <div class="projects-grid">
+
+        <button class="project-card" type="button" data-category="work" data-modal="modal-aqm" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M3 13a9 9 0 0118 0M3 13v6a2 2 0 002 2h2v-8H3zm14 0v8h2a2 2 0 002-2v-6h-4z"/></svg></div>
+            <span class="project-tag-cat">Work</span>
+          </div>
+          <h4 class="project-title">Air Quality Monitoring (AQM) Devices</h4>
+          <p class="project-description">Developed C++ software for e-paper displays and carried out regular maintenance of AQM devices to ensure accurate performance during internship.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">C++</span><span class="project-tech">E-paper Display</span><span class="project-tech">IoT</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="work" data-modal="modal-ble" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 7h4"/></svg></div>
+            <span class="project-tag-cat">Work</span>
+          </div>
+          <h4 class="project-title">QR Code Scanning — BLE Self-Payment System</h4>
+          <p class="project-description">Implemented BLE-based self-payment systems, enabling secure and efficient QR code scanning for seamless transaction processing.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">BLE</span><span class="project-tech">QR Code</span><span class="project-tech">Flutter</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="work" data-modal="modal-bpe" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg></div>
+            <span class="project-tag-cat">Work</span>
+          </div>
+          <h4 class="project-title">Automation of BPE Folding Machine</h4>
+          <p class="project-description">Automated folding mechanism for Body Protective Equipment built from scratch to replace manual labour and improve efficiency using an Omron PLC.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Omron CP1E</span><span class="project-tech">CX Programmer</span><span class="project-tech">Pneumatics</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="work" data-modal="modal-reverse" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7M21 4v6h-6"/></svg></div>
+            <span class="project-tag-cat">Work</span>
+          </div>
+          <h4 class="project-title">Reverse Engineering of Industrial Components</h4>
+          <p class="project-description">Reverse-engineered a Ven Pack machine frame and linear actuator setup to generate accurate CAD profiles and select component motors.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">SolidWorks</span><span class="project-tech">CAD Layouts</span><span class="project-tech">Calculations</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="work" data-modal="modal-dobot" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M2 12h4M18 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg></div>
+            <span class="project-tag-cat">Work</span>
+          </div>
+          <h4 class="project-title">Cobot Programming — DOBOT CR12A</h4>
+          <p class="project-description">Programmed a Dobot robot using the teaching pendant for pick-and-place tray tasks with coordinated PLC data register control.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">DOBOT CR12A</span><span class="project-tech">PLC Integration</span><span class="project-tech">Registers</span>
+          </div>
+        </button>
+      </div>
+
+      <h3 class="project-category-label" data-cat-label="university">University Projects</h3>
+      <div class="projects-grid">
+
+        <button class="project-card" type="button" data-category="university" data-modal="modal-robocar" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="6" rx="2"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg></div>
+            <span class="project-tag-cat">University</span>
+          </div>
+          <h4 class="project-title">Dual-Mode Robotic Car</h4>
+          <p class="project-description">Designed a dual-mode robotic car with autonomous maze navigation using ESP32-CAM and manual Bluetooth control via HC-05.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">ESP32-CAM</span><span class="project-tech">HC-05</span><span class="project-tech">Robotics</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="university" data-modal="modal-linefollow" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/></svg></div>
+            <span class="project-tag-cat">University</span>
+          </div>
+          <h4 class="project-title">Line-Following Cart</h4>
+          <p class="project-description">Arduino Nano based tracking cart utilizing analog PWM circuits and a custom Python GUI overlay for real-time sensor plotting.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Arduino Nano</span><span class="project-tech">Analog Circuits</span><span class="project-tech">Python GUI</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="university" data-modal="modal-crazy-machine" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></div>
+            <span class="project-tag-cat">University</span>
+          </div>
+          <h4 class="project-title">Advanced Digital Design — Automated Crazy Machine</h4>
+          <p class="project-description">Fully automated electromechanical setup transporting a steel ball through a themed sequence handled via VHDL state logic.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Altera FPGA</span><span class="project-tech">VHDL FSM</span><span class="project-tech">SolidWorks</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="university" data-modal="modal-avms" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-7M4 17h16"/></svg></div>
+            <span class="project-tag-cat">University</span>
+          </div>
+          <h4 class="project-title">Autonomous Vehicle Management System</h4>
+          <p class="project-description">Used data structures and algorithms in Python to build a management system for autonomous vehicle tracking and routing.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Python</span><span class="project-tech">Data Structures</span><span class="project-tech">Algorithms</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="university" data-modal="modal-road" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><path d="M4 21l4-14h8l4 14M9 13h6"/></svg></div>
+            <span class="project-tag-cat">University</span>
+          </div>
+          <h4 class="project-title">Road Structure Solution</h4>
+          <p class="project-description">First-year project designing solutions for Saibai Island muddy roads as requested by Australian engineers.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Civil Solutions</span><span class="project-tech">Management</span><span class="project-tech">Writing</span>
+          </div>
+        </button>
+      </div>
+
+      <h3 class="project-category-label" data-cat-label="personal">Personal Projects</h3>
+      <div class="projects-grid">
+
+        <button class="project-card" type="button" data-category="personal" data-modal="modal-scada" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg></div>
+            <span class="project-tag-cat">Personal</span>
+          </div>
+          <h4 class="project-title">PLC Project Involving SCADA</h4>
+          <p class="project-description">Automated a chemical treatment process system running sequence loops from WinCC SCADA and hardware panels.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Siemens S7-400</span><span class="project-tech">WinCC Flexible</span><span class="project-tech">SCADA</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="personal" data-modal="modal-elevator" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="1"/><path d="M9 22V2M15 22V2"/></svg></div>
+            <span class="project-tag-cat">Personal</span>
+          </div>
+          <h4 class="project-title">3-Level Elevator Model</h4>
+          <p class="project-description">Automated a physical 3-level scale elevator using precise sequential execution logic triggered by terminal pushbuttons.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">PLC Logic</span><span class="project-tech">Ladder Logic</span><span class="project-tech">Automation</span>
+          </div>
+        </button>
+
+        <button class="project-card" type="button" data-category="personal" data-modal="modal-obstacle" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            <span class="project-tag-cat">Personal</span>
+          </div>
+          <h4 class="project-title">Obstacle Avoiding Vehicle</h4>
+          <p class="project-description">Arduino-based obstacle-avoiding vehicle using ultrasonic sensors for detection and PID control for stable motor navigation.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">Arduino</span><span class="project-tech">Ultrasonic Sensor</span><span class="project-tech">PID Control</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="section-head">
+        <div class="section-icon"><svg class="ico-section" viewBox="0 0 24 24"><path d="M12 2l2.4 6.9L21 9l-5.5 4.3L17 21l-5-3.8L7 21l1.5-7.7L3 9l6.6-.1z"/></svg></div>
+        <div>
+          <span class="section-eyebrow">Capabilities</span>
+          <h2 class="section-title">Skills</h2>
         </div>
-    </div>
-
-    <div id="modal-road" class="modal-overlay" onclick="closeModalOutside(event, 'modal-road')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-road')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-map"/></svg></div>
-                <h2 class="modal-title">Road Structure Solution</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>First-year project designing engineering structural improvements for Saibai Island muddy roads as requested by Australian engineers to ensure reliable year-round infrastructure paths.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">University · First-Year Engineering</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2023</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">Civil Solutions</span><span class="meta-tag">Management</span><span class="meta-tag">Writing</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Coursework report</div></div>
-                </aside>
-            </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skills-category">
+          <h3>Technical</h3>
+          <div class="skills-list">
+            <span class="skill-tag">SolidWorks</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Python</span><span class="skill-tag">C++</span><span class="skill-tag">PLC Programming</span><span class="skill-tag">Photoshop</span>
+          </div>
         </div>
-    </div>
-
-    <div id="modal-plc-scada" class="modal-overlay" onclick="closeModalOutside(event, 'modal-plc-scada')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-plc-scada')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-sliders"/></svg></div>
-                <h2 class="modal-title">PLC Project Involving SCADA</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Completed the Chemical Treatment Process Automation project as part of my coursework at SLIR using Siemens S7-400 (Simatic Manager) and WinCC Flexible for SCADA development.</p>
-                        <p>I focused on programming the PLC logic to manage sequential operations, such as tank filling, timed heating, and pump control, all of which were implemented using ladder logic.</p>
-                    </div>
-                    <div class="modal-section">
-                        <h4>Control Interfaces</h4>
-                        <p>The system was designed to be controlled from multiple sources:</p>
-                        <ul>
-                            <li>SCADA interface developed in WinCC Flexible</li>
-                            <li>Visual PLC simulation within Simatic Manager</li>
-                            <li>Physical push buttons and sensors from the model</li>
-                        </ul>
-                        <p>This project allowed me to apply both PLC programming and HMI development skills in a hands-on, integrated environment.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Personal · Industrial Automation</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2024</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">Siemens S7-400</span><span class="meta-tag">WinCC Flexible</span><span class="meta-tag">SCADA</span><span class="meta-tag">Ladder Logic</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+        <div class="skills-category">
+          <h3>Soft Skills</h3>
+          <div class="skills-list">
+            <span class="skill-tag">Teamwork</span><span class="skill-tag">Adaptability</span><span class="skill-tag">Leadership</span><span class="skill-tag">Time Management</span>
+          </div>
         </div>
-    </div>
-
-    <div id="modal-elevator" class="modal-overlay" onclick="closeModalOutside(event, 'modal-elevator')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-elevator')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-building"/></svg></div>
-                <h2 class="modal-title">3 Level Elevator Model</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Overview</h4>
-                        <p>Automating a 3-Level Elevator with Ladder Logic! Excited to share my first PLC programming project at Sri Lanka Institute of Robotics (SLIR)! I automated a 3-level elevator model using Ladder Logic Programming, focusing entirely on the programming aspect.</p>
-                        <ul>
-                            <li>The elevator responds to button presses, moving up or down to the selected floor.</li>
-                            <li>Implemented precise control logic for smooth operation.</li>
-                            <li>A great hands-on experience in industrial automation!</li>
-                        </ul>
-                        <p>This project deepened my understanding of PLC programming and real-world automation applications.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Personal · PLC / Automation</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2024</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">PLC logic</span><span class="meta-tag">Ladder Logic</span><span class="meta-tag">Automation</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+        <div class="skills-category">
+          <h3>Languages</h3>
+          <div class="skills-list">
+            <span class="skill-tag">English</span><span class="skill-tag">Sinhala</span>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <div id="modal-obstacle" class="modal-overlay" onclick="closeModalOutside(event, 'modal-obstacle')">
-        <div class="modal">
-            <div class="modal-header">
-                <button class="modal-close" onclick="closeModal('modal-obstacle')"><svg class="ico"><use href="#i-x"/></svg></button>
-                <div class="modal-icon"><svg class="ico"><use href="#i-rocket"/></svg></div>
-                <h2 class="modal-title">Obstacle Avoiding Vehicle</h2>
-            </div>
-            <div class="modal-body">
-                <div class="modal-main">
-                    <div class="modal-section">
-                        <h4>Project Core</h4>
-                        <p>This project features an Arduino-based obstacle-avoiding vehicle using ultrasonic sensors for detection and a PID controller to maintain stable and precise motor speed, ensuring smooth and efficient navigation.</p>
-                    </div>
-                    <div class="media-showcase">
-                        <div class="media-showcase-head"><svg class="ico ico-lg"><use href="#i-image"/></svg><span class="media-showcase-title">Project Media / CAD / Schematics Showcase</span></div>
-                        <div class="media-showcase-grid">
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                            <div class="media-tile"><svg class="ico"><use href="#i-image"/></svg>Image / Diagram</div>
-                        </div>
-                        <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-                    </div>
-                </div>
-                <aside class="modal-aside meta-card">
-                    <h4>Project Profile</h4>
-                    <div class="meta-row"><div class="meta-label">Project Type</div><div class="meta-value">Personal · Robotics</div></div>
-                    <div class="meta-row"><div class="meta-label">Year</div><div class="meta-value">2023</div></div>
-                    <div class="meta-row"><div class="meta-label">Core Technology Stack</div><div class="meta-tags"><span class="meta-tag">Arduino</span><span class="meta-tag">Ultrasonic Sensor</span><span class="meta-tag">PID Control</span></div></div>
-                    <div class="meta-row"><div class="meta-label">Repository</div><div class="meta-value" style="color:var(--text-muted); font-weight:500;">Not publicly available</div></div>
-                </aside>
-            </div>
+    <!-- ============ EDUCATION ============ -->
+    <section class="section" id="education">
+      <div class="section-head">
+        <div class="section-icon"><svg class="ico-section" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5zM6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></div>
+        <div>
+          <span class="section-eyebrow">Academics</span>
+          <h2 class="section-title">Education</h2>
         </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">Bachelor of Engineering (Honours) in Mechatronics Engineering</span>
+          <span class="item-period">Jul 2023 – Jun 2027</span>
+        </div>
+        <p class="item-description">Curtin Colombo (Sri Lanka Branch of Curtin University Australia). Third-year undergraduate with a 79.59% course weighted average, gaining comprehensive knowledge in mechatronics systems, automation, robotics, and control systems.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">G.C.E. Advanced Level &amp; Ordinary Level</span>
+          <span class="item-period">2009 – 2022</span>
+        </div>
+        <p class="item-description"><strong>A/L:</strong> Combined Mathematics (B), Physics (C), Chemistry (C). <strong>O/L:</strong> Distinctions in Mathematics, Science, Buddhism, History, English Language, Sinhala Language, Commerce, English Literature, and Information Technology. — Thurstan College, Colombo</p>
+      </div>
+    </section>
+
+    <!-- ============ ACHIEVEMENTS ============ -->
+    <section class="section" id="achievements">
+      <div class="section-head">
+        <div class="section-icon"><svg class="ico-section" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg></div>
+        <div>
+          <span class="section-eyebrow">Recognition</span>
+          <h2 class="section-title">Key Achievements</h2>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">PLC Programming Certification — SLIR Institute</span>
+          <span class="item-period">Certified</span>
+        </div>
+        <p class="item-description">Industry-focused PLC programming training covering automation systems, HMI/SCADA development, motor controls, and hands-on experience with Siemens, Mitsubishi, and Xinje PLC platforms.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">Assistant Treasurer — Curtin Colombo Student Guild</span>
+          <span class="item-period">2024 – 2025</span>
+        </div>
+        <p class="item-description">Managing financial responsibilities and contributing to student governance activities at university level.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-head">
+          <span class="item-title">President — Photographic Society of Thurstan College</span>
+          <span class="item-period">2020 – 2021</span>
+        </div>
+        <p class="item-description">Collaborated with colleagues to organise events and manage junior members of the society, developing leadership and organisational skills.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ============ CONTACT / FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="container footer-inner">
+    <div class="footer-main">
+      <h2 class="footer-title">Let's build something.</h2>
+      <p class="footer-sub">Open to internship and graduate engineering opportunities — reach out any time.</p>
+      <div class="footer-links">
+        <a class="chip chip-on-dark" href="mailto:hashingayasha.tc@gmail.com">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M3 8l9 6 9-6M3 6h18v12H3z"/></svg>
+          hashingayasha.tc@gmail.com
+        </a>
+        <a class="chip chip-on-dark" href="tel:+94776166691">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.69 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.33 1.85.56 2.81.69A2 2 0 0122 16.92z"/></svg>
+          +94 77 616 6691
+        </a>
+        <a class="chip chip-on-dark" href="https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+          LinkedIn
+        </a>
+        <a class="chip chip-on-dark" href="resume.pdf" download>
+          <svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          Résumé (PDF)
+        </a>
+      </div>
     </div>
+    <div class="footer-meta">
+      <span>Mount Lavinia, Sri Lanka</span>
+      <span>© 2026 Hashin Gayasha Maharambage</span>
+    </div>
+  </div>
+</footer>
 
-    <script>
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if(modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if(modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        }
-        function closeModalOutside(event, modalId) {
-            if(event.target.id === modalId) {
-                closeModal(modalId);
-            }
-        }
-        document.addEventListener('keydown', (e) => {
-            if(e.key === 'Escape') {
-                document.querySelectorAll('.modal-overlay.active').forEach(m => {
-                    m.classList.remove('active');
-                });
-                document.body.style.overflow = 'auto';
-            }
-        });
+<!-- ============ MODALS ============ -->
+<div id="modalRoot"></div>
 
-        // Project filter
-        function filterProjects(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const cards = document.querySelectorAll('.project-card');
-            const labels = document.querySelectorAll('.project-category-label');
-            cards.forEach((c, i) => {
-                const match = category === 'all' || c.dataset.category === category;
-                c.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                if (match) {
-                    c.classList.remove('hidden');
-                    c.style.opacity = '0';
-                    requestAnimationFrame(() => {
-                        c.style.opacity = '1';
-                    });
-                } else {
-                    c.style.opacity = '0';
-                    setTimeout(() => c.classList.add('hidden'), 200);
-                }
-            });
-            labels.forEach(l => {
-                const cat = l.dataset.catLabel;
-                l.style.display = (category === 'all' || cat === category) ? '' : 'none';
-            });
-        }
-
-        // Mobile nav
-        function toggleNav() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
-        function closeNav() {
-            document.getElementById('navLinks').classList.remove('open');
-        }
-
-        // Theme toggle (light/dark) with persistence + system preference
-        (function initTheme(){
-            const saved = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = saved || (prefersDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-        function toggleTheme() {
-            const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-            const next = cur === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-        }
-    </script>
+<script src="projects-data.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
