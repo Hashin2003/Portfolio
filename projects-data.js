@@ -100,6 +100,43 @@ const PROJECTS = {
     `
   },
 
+  "modal-karto-slam": {
+    title: "Karto SLAM & Autonomous Navigation — ROS 2",
+    type: "University · Autonomous Robotics",
+    year: "2025",
+    tech: ["ROS 2", "Karto SLAM", "Gazebo", "TurtleBot4", "Nav2", "Python", "slam_karto_ros2"],
+    repo: { label: "Coursework — not publicly hosted" },
+    body: `
+      <h4>Project Overview</h4>
+      <p>As part of our autonomous robotics coursework, we delved into Karto SLAM — a graph-based optimisation algorithm for real-time 2D mapping and localisation. Using ROS 2 as our core framework, we implemented and tested the system through the ADLINK open-source package <em>slam_karto_ros2</em>.</p>
+      <p>Our goal was to understand how mobile robots build and refine a map while simultaneously tracking their own position — the core challenge of SLAM (Simultaneous Localisation and Mapping).</p>
+
+      <h4>Technical Breakdown</h4>
+      <ul>
+        <li><strong>Scan Matching:</strong> Analysed how Karto aligns successive LiDAR scans to estimate robot displacement with high accuracy.</li>
+        <li><strong>Pose-Graph Generation:</strong> Studied how each robot pose is added as a node, with edges encoding spatial constraints between positions.</li>
+        <li><strong>Loop Closure:</strong> Explored how the system detects revisited locations and applies graph optimisation to correct accumulated drift.</li>
+        <li><strong>Data Association:</strong> Investigated how sensor measurements are matched to existing map features to maintain consistency.</li>
+      </ul>
+
+      <h4>Simulation & Integration</h4>
+      <ul>
+        <li>Ran the full SLAM pipeline on a TurtleBot4 mobile robot inside the Gazebo simulation environment.</li>
+        <li>Integrated Nav2 for autonomous path planning and localisation, enabling the robot to navigate while building the map in real time.</li>
+        <li>Assessed map accuracy and system stability under different navigation patterns and environments.</li>
+      </ul>
+
+      <h4>Key Outcomes</h4>
+      <ul>
+        <li>Gained deep insight into sensor fusion and graph optimisation for mobile robotics.</li>
+        <li>Understood the trade-offs between theoretical modelling and real-time SLAM performance.</li>
+        <li>Successfully demonstrated a working autonomous mapping and navigation system in simulation.</li>
+      </ul>
+
+      <p><em>Collaborated with Aakash Kumareson and Chiranga Karunaratne. Guidance from faculty mentors and ADLINK ROS open-source community.</em></p>
+    `
+  },
+
   "modal-robocar": {
     title: "Microcontroller Project — Dual-Mode Robotic Car",
     type: "University · Microcontroller Coursework",

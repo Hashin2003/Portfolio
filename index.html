@@ -88,7 +88,7 @@
         <path id="tracePath" d="M0,20 L120,20 L150,8 L850,8 L880,20 L1000,20"/>
       </svg>
       <div class="stats-grid">
-        <div class="stat-node"><span class="stat-num">13</span><span class="stat-label">Projects Logged</span></div>
+        <div class="stat-node"><span class="stat-num">14</span><span class="stat-label">Projects Logged</span></div>
         <div class="stat-node"><span class="stat-num">2</span><span class="stat-label">Industry Internships</span></div>
         <div class="stat-node"><span class="stat-num">80.52<small>%</small></span><span class="stat-label">Course Weighted Avg.</span></div>
         <div class="stat-node"><span class="stat-num">4<small>th</small></span><span class="stat-label">Year Undergraduate</span></div>
@@ -177,12 +177,21 @@
           <p class="featured-desc">Programmed an industrial cobot for pick-and-place tasks with coordinated PLC register control and full commissioning.</p>
           <span class="featured-cta">View case study <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </button>
+        <button class="featured-card" type="button" data-modal="modal-karto-slam" aria-haspopup="dialog">
+          <div class="featured-card-tags">
+            <span class="project-tag-cat">University</span>
+            <span class="status-chip status-shipped">Shipped</span>
+          </div>
+          <h3 class="featured-title">Karto SLAM &amp; Autonomous Navigation — ROS 2</h3>
+          <p class="featured-desc">Graph-based SLAM implementation on a TurtleBot4 in Gazebo — scan matching, pose-graph optimisation, loop closure, and Nav2 path planning.</p>
+          <span class="featured-cta">View case study <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
       </div>
 
       <div class="filter-bar" role="tablist" aria-label="Filter projects">
-        <button class="filter-btn active" type="button" role="tab" aria-selected="true"  data-filter="all">All <span class="count">13</span></button>
+        <button class="filter-btn active" type="button" role="tab" aria-selected="true"  data-filter="all">All <span class="count">14</span></button>
         <button class="filter-btn"        type="button" role="tab" aria-selected="false" data-filter="work">Work-Related <span class="count">5</span></button>
-        <button class="filter-btn"        type="button" role="tab" aria-selected="false" data-filter="university">University <span class="count">5</span></button>
+        <button class="filter-btn"        type="button" role="tab" aria-selected="false" data-filter="university">University <span class="count">6</span></button>
         <button class="filter-btn"        type="button" role="tab" aria-selected="false" data-filter="personal">Personal <span class="count">3</span></button>
       </div>
 
@@ -289,6 +298,17 @@
           <p class="project-description">Used data structures and algorithms in Python to build a management system for autonomous vehicle tracking and routing.</p>
           <div class="project-tech-row">
             <span class="project-tech">Python</span><span class="project-tech">Data Structures</span><span class="project-tech">Algorithms</span>
+          </div>
+        </button>
+        <button class="project-card" type="button" data-category="university" data-modal="modal-karto-slam" aria-haspopup="dialog">
+          <div class="project-card-head">
+            <div class="project-card-icon"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></div>
+            <span class="project-tag-cat">University</span>
+          </div>
+          <h4 class="project-title">Karto SLAM &amp; Autonomous Navigation — ROS 2</h4>
+          <p class="project-description">Graph-based SLAM implementation using slam_karto_ros2 on a TurtleBot4 in Gazebo — scan matching, pose-graph optimisation, loop closure, and Nav2 path planning.</p>
+          <div class="project-tech-row">
+            <span class="project-tech">ROS 2</span><span class="project-tech">Karto SLAM</span><span class="project-tech">Gazebo</span><span class="project-tech">Nav2</span>
           </div>
         </button>
         <button class="project-card" type="button" data-category="university" data-modal="modal-road" aria-haspopup="dialog">
