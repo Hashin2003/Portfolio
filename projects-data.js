@@ -181,7 +181,8 @@ const PROJECTS = {
         { src: "Projects/Dual%20mode%20robotic%20car/Cart.jpg", alt: "The tracked dual-mode robotic car with its onboard wiring and electronics", caption: "The Robotic Car" },
         { src: "Projects/Dual%20mode%20robotic%20car/Controller1.jpg", alt: "Handheld controller with dual joysticks, Arduino, and LCD display for manual mode", caption: "Manual Controller — Top View" },
         { src: "Projects/Dual%20mode%20robotic%20car/Controller2.jpg", alt: "Underside of the handheld controller showing the Arduino Mega and wireless modules", caption: "Manual Controller — Underside" }
-      ]
+      ],
+      video: { url: "https://drive.google.com/file/d/1uFYaNCIavP_cSzhbzZxTqCoZkV92NDUL/view?usp=sharing", title: "Dual-mode robotic car demo video" }
     },
     body: `
       <h4>Project Overview</h4>
