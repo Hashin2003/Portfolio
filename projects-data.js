@@ -354,7 +354,10 @@ const PROJECTS = {
     type: "Personal · PLC / Automation",
     year: "2024",
     tech: ["PLC Logic", "Ladder Logic", "Automation"],
-    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/ElevatorModel" },
+    repo: { links: [
+      { label: "View on GitHub", url: "https://github.com/Hashin2003/ElevatorModel" },
+      { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" }
+    ] },
     media: {},
     body: `
       <h4>Project Overview</h4>
@@ -371,7 +374,10 @@ const PROJECTS = {
     type: "Personal · Robotics",
     year: "2023",
     tech: ["Arduino", "Ultrasonic Sensor", "PID Control"],
-    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/OAVCode" },
+    repo: { links: [
+      { label: "View on GitHub", url: "https://github.com/Hashin2003/OAVCode" },
+      { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" }
+    ] },
     media: {},
     body: `
       <h4>Project Overview</h4>
