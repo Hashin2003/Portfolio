@@ -47,6 +47,78 @@
   const modalRoot    = document.getElementById("modalRoot");
   let   lastFocused  = null;
 
+  function buildMediaHtml(media) {
+    if (!media) {
+      return `
+            <div class="media-showcase">
+              <div class="media-showcase-head">
+                <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span class="media-showcase-title">Project Media / CAD / Schematics</span>
+              </div>
+              <div class="media-showcase-grid">
+                <div class="media-tile"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Image</div>
+                <div class="media-tile"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Image</div>
+                <div class="media-tile"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Image</div>
+              </div>
+              <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
+            </div>`;
+    }
+    const galleryHtml = (media.images && media.images.length)
+      ? `<div class="media-showcase-head">
+              <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+              <span class="media-showcase-title">Gallery</span>
+            </div>
+            <div class="modal-gallery">${media.images.map(img => `
+              <figure>
+                <img src="${img.src}" alt="${img.alt}" loading="lazy">
+                <figcaption>${img.caption}</figcaption>
+              </figure>`).join("")}</div>`
+      : "";
+    const videoHtml = media.video
+      ? `<div class="media-showcase-head">
+              <svg class="ico" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              <span class="media-showcase-title">Demo Video</span>
+            </div>
+            ${buildVideoEmbed(media.video)}`
+      : "";
+    const pdfHtml = media.pdf
+      ? `<div class="media-showcase-head">
+              <svg class="ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+              <span class="media-showcase-title">${media.pdf.title || "Report"}</span>
+            </div>
+            <div class="modal-pdf-embed">
+              <iframe src="${media.pdf.src}#toolbar=0" title="${media.pdf.title || "Project report"}" loading="lazy"></iframe>
+            </div>`
+      : "";
+    return galleryHtml + videoHtml + pdfHtml;
+  }
+
+  function buildVideoEmbed(video) {
+    const label = video.title || "Demo video";
+    if (video.src) {
+      return `<div class="modal-video-embed">
+              <video controls preload="metadata" playsinline${video.poster ? ` poster="${video.poster}"` : ""}>
+                <source src="${video.src}" type="video/mp4">
+              </video>
+            </div>`;
+    }
+    const href = video.youtubeId ? `https://youtu.be/${video.youtubeId}` : video.url;
+    if (video.poster) {
+      return `<div class="modal-video-embed">
+              <a class="video-play-trigger" href="${href}" target="_blank" rel="noopener" aria-label="Watch ${label}">
+                <img src="${video.poster}" alt="${label} preview" loading="lazy">
+                <span class="video-play-badge"><svg class="ico" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+              </a>
+            </div>`;
+    }
+    return `<div class="modal-video-embed">
+              <a class="video-link-card" href="${href}" target="_blank" rel="noopener">
+                <svg class="ico" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                <span>Watch ${label}</span>
+              </a>
+            </div>`;
+  }
+
   function buildModal(id, data) {
     const overlay = document.createElement("div");
     overlay.className = "modal-overlay";
@@ -57,10 +129,12 @@
       `<span class="project-tech"><span class="project-tech-text">${t}</span></span>`
     ).join("");
 
+    const githubIcon = `<svg class="ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.45 9.45 0 015 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>`;
+    const externalIcon = `<svg class="ico" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>`;
     const repoHtml = data.repo.url
       ? `<a class="modal-github-link" href="${data.repo.url}" target="_blank" rel="noopener">
-           <svg class="ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.45 9.45 0 015 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
-           View on GitHub
+           ${/github\.com/i.test(data.repo.url) ? githubIcon : externalIcon}
+           ${data.repo.label}
          </a>`
       : `<p class="meta-value-sub">${data.repo.label}</p>`;
 
@@ -87,18 +161,7 @@
           </div>
           <div class="modal-main">
             <div class="modal-section">${data.body}</div>
-            <div class="media-showcase">
-              <div class="media-showcase-head">
-                <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                <span class="media-showcase-title">Project Media / CAD / Schematics</span>
-              </div>
-              <div class="media-showcase-grid">
-                <div class="media-tile"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Image</div>
-                <div class="media-tile"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Image</div>
-                <div class="media-tile"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Image</div>
-              </div>
-              <p class="media-showcase-hint">Insert images, CAD renders, or schematics here.</p>
-            </div>
+            ${buildMediaHtml(data.media)}
           </div>
         </div>
       </div>`;

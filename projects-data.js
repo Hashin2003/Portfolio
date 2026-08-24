@@ -9,7 +9,8 @@ const PROJECTS = {
     type: "Work-Related · Internship",
     year: "2024 – 2025",
     tech: ["C++", "E-paper Display", "IoT"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" },
+    media: {},
     body: `
       <h4>Project Overview</h4>
       <p>Developed C++ software for e-paper displays and carried out regular maintenance of AQM devices to ensure accurate and reliable performance during the internship period.</p>
@@ -21,7 +22,8 @@ const PROJECTS = {
     type: "Work-Related · Internship",
     year: "2024 – 2025",
     tech: ["BLE", "QR Code", "Flutter"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" },
+    media: {},
     body: `
       <h4>Project Overview</h4>
       <p>Implemented BLE-based self-payment systems, enabling secure and efficient QR code scanning for seamless transaction processing without requiring active client internet infrastructure.</p>
@@ -34,6 +36,17 @@ const PROJECTS = {
     year: "2025 – 2026",
     tech: ["Omron CP1E", "CX Programmer", "Pneumatics", "Kinco HMI", "RS-232"],
     repo: { label: "Proprietary / Internal" },
+    media: {
+      images: [
+        { src: "Projects/BPE%20folding%20machine/cad1.png", alt: "CAD model of the automated BPE folding machine, view 1", caption: "CAD Design 1" },
+        { src: "Projects/BPE%20folding%20machine/cad2.png", alt: "CAD model of the automated BPE folding machine, view 2", caption: "CAD Design 2" },
+        { src: "Projects/BPE%20folding%20machine/r.png", alt: "The completed BPE folding machine, fully built and assembled", caption: "Final Build" },
+        { src: "Projects/BPE%20folding%20machine/h1.png", alt: "RS-232 serial connection setup between the HMI and the Omron CP1E PLC", caption: "PLC ↔ HMI Serial Link (RS-232)" },
+        { src: "Projects/BPE%20folding%20machine/h2.png", alt: "Kinco HMI screen 1 for the BPE folding machine", caption: "HMI Screen 1" },
+        { src: "Projects/BPE%20folding%20machine/h3.png", alt: "Kinco HMI screen 2 for the BPE folding machine", caption: "HMI Screen 2" },
+        { src: "Projects/BPE%20folding%20machine/h4.png", alt: "Kinco HMI screen 3 for the BPE folding machine", caption: "HMI Screen 3" }
+      ]
+    },
     body: `
       <h4>Problem</h4>
       <ul>
@@ -64,6 +77,17 @@ const PROJECTS = {
     year: "2025 – 2026",
     tech: ["SolidWorks", "CAD Layouts", "Calculations"],
     repo: { label: "Proprietary / Internal" },
+    media: {
+      images: [
+        { src: "Projects/Reverse%20engineering/Machine1/C1%20%281%29.png", alt: "CAD model of the reverse-engineered Ven Pack machine frame, bare steel structure", caption: "Ven Pack Frame — Bare Steel CAD" },
+        { src: "Projects/Reverse%20engineering/Machine1/C1%20%282%29.png", alt: "CAD model of the Ven Pack machine frame with sheet metal cladding fitted", caption: "Ven Pack Frame — With Cladding" },
+        { src: "Projects/Reverse%20engineering/Machine1/C1%20%283%29.png", alt: "CAD model of the Ven Pack machine frame with cladding, alternate view", caption: "Ven Pack Frame — Cladding Detail" },
+        { src: "Projects/Reverse%20engineering/Machine1/R.jpeg", alt: "The real Ven Pack machine on the shop floor after reverse engineering", caption: "Ven Pack Machine — Real Build" },
+        { src: "Projects/Reverse%20engineering/MAchine2/C%20%281%29.png", alt: "CAD model of the linear actuator carriage and mounting bracket assembly", caption: "Linear Actuator — Carriage CAD" },
+        { src: "Projects/Reverse%20engineering/MAchine2/C%20%282%29.png", alt: "CAD model of the full linear actuator assembly with motor mount", caption: "Linear Actuator — Full Assembly CAD" },
+        { src: "Projects/Reverse%20engineering/MAchine2/r.jpeg", alt: "The real linear actuator setup used for reverse engineering measurements", caption: "Linear Actuator Setup — Real Machine" }
+      ]
+    },
     body: `
       <h4>Ven Pack Machine</h4>
       <ul>
@@ -88,6 +112,12 @@ const PROJECTS = {
     year: "2025 – 2026",
     tech: ["DOBOT CR12A", "PLC Integration", "Registers"],
     repo: { label: "Proprietary / Internal" },
+    media: {
+      images: [
+        { src: "Projects/Cobot%20programming/WhatsApp%20Image%202026-02-11%20at%2023.55.42.jpeg", alt: "DobotStudioPro block-based program on the teaching pendant, showing Modbus TCP holding registers and pick-and-place subroutines", caption: "Block Program — Modbus Registers & Subroutines" },
+        { src: "Projects/Cobot%20programming/WhatsApp%20Image%202026-02-11%20at%2023.55.52.jpeg", alt: "DOBOT CR12A cobot arm on the shop floor with the teaching pendant running the pick-and-place program", caption: "CR12A Running the Program" }
+      ]
+    },
     body: `
       <h4>Technical Scope</h4>
       <ul>
@@ -105,7 +135,10 @@ const PROJECTS = {
     type: "University · Autonomous Robotics",
     year: "2025",
     tech: ["ROS 2", "Karto SLAM", "Gazebo", "TurtleBot4", "Nav2", "Python", "slam_karto_ros2"],
-    repo: { label: "Coursework — not publicly hosted" },
+    repo: { label: "View on GitHub", url: "https://github.com/AnusaraIsindu/ros2_karto_slam" },
+    media: {
+      video: { url: "https://drive.google.com/file/d/1JwZEj6Kol4WVS5WFO6fi7IaCVEAZQKeQ/view?usp=drive_link", title: "Karto SLAM case study demo video" }
+    },
     body: `
       <h4>Project Overview</h4>
       <p>As part of our autonomous robotics coursework, we delved into Karto SLAM — a graph-based optimisation algorithm for real-time 2D mapping and localisation. Using ROS 2 as our core framework, we implemented and tested the system through the ADLINK open-source package <em>slam_karto_ros2</em>.</p>
@@ -142,7 +175,14 @@ const PROJECTS = {
     type: "University · Microcontroller Coursework",
     year: "2025",
     tech: ["ESP32-CAM", "HC-05", "Robotics"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/MXEN-Project" },
+    media: {
+      images: [
+        { src: "Projects/Dual%20mode%20robotic%20car/Cart.jpg", alt: "The tracked dual-mode robotic car with its onboard wiring and electronics", caption: "The Robotic Car" },
+        { src: "Projects/Dual%20mode%20robotic%20car/Controller1.jpg", alt: "Handheld controller with dual joysticks, Arduino, and LCD display for manual mode", caption: "Manual Controller — Top View" },
+        { src: "Projects/Dual%20mode%20robotic%20car/Controller2.jpg", alt: "Underside of the handheld controller showing the Arduino Mega and wireless modules", caption: "Manual Controller — Underside" }
+      ]
+    },
     body: `
       <h4>Project Overview</h4>
       <p>Designed and developed a dual-mode car capable of operating in both autonomous and manual control modes.</p>
@@ -165,7 +205,16 @@ const PROJECTS = {
     type: "University · Control Systems",
     year: "2025",
     tech: ["Arduino Nano", "Analog Circuits", "Python GUI", "555 Timer"],
-    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/Line-Following-Cart.git" },
+    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/Line-Following-Cart" },
+    media: {
+      images: [
+        { src: "Projects/Line%20following/WhatsApp%20Image%202025-10-20%20at%2009.51.22_8cbb1a80.jpg", alt: "Front view of the assembled line-following cart", caption: "The Cart — Front View" },
+        { src: "Projects/Line%20following/WhatsApp%20Image%202025-10-20%20at%2009.51.21_dad86c00.jpg", alt: "Rear view of the line-following cart showing the IR sensor pair underneath", caption: "The Cart — Rear View" },
+        { src: "Projects/Line%20following/WhatsApp%20Image%202025-10-20%20at%2009.51.22_676d2335.jpg", alt: "Top-down view of the custom analog control PCB with the Arduino Nano", caption: "Analog Control PCB" },
+        { src: "Projects/Line%20following/GUI.png", alt: "Team Tritans custom Python control panel GUI with live IR sensor plot and output controls", caption: "Team Tritans — Python Control Panel" }
+      ],
+      video: { src: "Projects/Line%20following/2025_10_14_16_02_IMG_4249.MP4", title: "Line-following cart demo video" }
+    },
     body: `
       <h4>Project Summary</h4>
       <p>An Arduino Nano based tracking cart combining real-time Bang-Bang control with a DAC + LM741 + LM339 + 555 Timer circuit for analog PWM generation, paired with a Python GUI for live control and sensor visualisation.</p>
@@ -178,7 +227,18 @@ const PROJECTS = {
     type: "University · Advanced Digital Design",
     year: "2025",
     tech: ["Altera DE1 FPGA", "VHDL", "FSM Design", "Arduino Mega", "SolidWorks", "3D Printing", "NEMA 17", "A4988", "IR Sensors"],
-    repo: { label: "Coursework — not publicly hosted" },
+    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/Advanced-Digital-Design" },
+    media: {
+      images: [
+        { src: "Projects/Automated%20Crazy%20Machine/1.png", alt: "SolidWorks CAD model of the Automated Crazy Machine", caption: "CAD Design (SolidWorks)" },
+        { src: "Projects/Automated%20Crazy%20Machine/2.jpg", alt: "The completed Automated Crazy Machine, fully built and assembled", caption: "Final Build" }
+      ],
+      video: {
+        youtubeId: "amQy1HgTtDQ",
+        poster: "Projects/Automated%20Crazy%20Machine/Linkedin%20Video-Cover.jpg",
+        title: "Automated Crazy Machine demo video"
+      }
+    },
     body: `
       <h4>Project Overview</h4>
       <p>Designed and developed a fully automated electromechanical Crazy Machine module that transports a steel ball through a themed bank-robbery sequence without human intervention. The system combines FPGA-based control, embedded systems, mechanical design, and automation to execute elevators, doors, vault mechanisms, and a final escape system. Controlled by an Altera FPGA running a VHDL-based finite state machine, with an Arduino Mega supporting additional I/O such as OLED display control and motor operation.</p>
@@ -214,10 +274,42 @@ const PROJECTS = {
     type: "University · Software / Algorithms",
     year: "2024",
     tech: ["Python", "Data Structures", "Algorithms"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/VehicleLocationManager" },
+    media: {},
     body: `
       <h4>Project Overview</h4>
       <p>Used data structures and algorithms in Python to build a management system for autonomous vehicle tracking, routing matrix arrays, and speed control optimisation blocks.</p>
+    `
+  },
+
+  "modal-robot-manipulation": {
+    title: "Robot Manipulation — ROS 2 Dobot Control",
+    type: "University · Robotics / ROS 2 (MXEN3005 Design Project)",
+    year: "2026",
+    tech: ["ROS 2", "Python", "Inverse Kinematics", "URDF", "Dobot", "Action/Service Interfaces"],
+    repo: { label: "View on GitHub", url: "https://github.com/Hashin2003/Robot-Manipulation" },
+    media: {
+      video: { src: "Projects/Robot%20Manipulation/lv_0_20260527113056.mp4", title: "Robot Manipulation demo video" }
+    },
+    body: `
+      <h4>Project Overview</h4>
+      <p>Built a ROS 2 workspace for controlling a Dobot robotic arm as the MXEN3005 Design Project, structured as two packages: a custom interface package defining the robot's motion contracts, and a driver/teleop package implementing kinematics, control, and manual operation.</p>
+
+      <h4>dobot_interface — Custom ROS 2 Interfaces</h4>
+      <ul>
+        <li><strong>JointPTP.action</strong> — point-to-point joint-space motion as an action goal, allowing progress feedback and cancellation during longer moves.</li>
+        <li><strong>PosePTP.action</strong> — point-to-point Cartesian pose motion, letting a client command the end-effector directly in task space.</li>
+        <li><strong>PickAndPlace.srv</strong> — a service for triggering a full pick-and-place sequence in one call.</li>
+      </ul>
+
+      <h4>dobot_teleop — Kinematics, Control &amp; Teleoperation</h4>
+      <ul>
+        <li>Implemented custom forward and inverse kinematics for the Dobot arm in <code>dobot_kinematics.py</code>.</li>
+        <li>Built a driver/server pair (<code>dobot_driver.py</code>, <code>dobot_server.py</code>) to bridge ROS 2 nodes with the physical arm.</li>
+        <li>Developed a control node (<code>dobot_control_node.py</code>) that hosts the action/service servers defined in <code>dobot_interface</code>.</li>
+        <li>Added a keyboard teleoperation node (<code>keyboard_teleop_node.py</code>) for manual jogging and testing outside of autonomous sequences.</li>
+        <li>Modelled the arm with URDF and mesh files for visualisation and simulation.</li>
+      </ul>
     `
   },
 
@@ -227,6 +319,10 @@ const PROJECTS = {
     year: "2023",
     tech: ["Civil Solutions", "Management", "Writing"],
     repo: { label: "Coursework report" },
+    media: {
+      video: { src: "Projects/Road%20Strcuture/INDE%20road%20design_final%20version%20v6%20v2%20v20.mp4", title: "Final road structure demo video" },
+      pdf: { src: "Projects/Road%20Strcuture/INDE1001%20Stage%201-%20Yellow%20Squad%20-%20Design%20Pacakage.pdf", title: "Tender Report — Design Package" }
+    },
     body: `
       <h4>Project Overview</h4>
       <p>First-year project designing structural improvements for Saibai Island's muddy roads, as requested by Australian engineers, to ensure reliable year-round infrastructure paths.</p>
@@ -238,7 +334,8 @@ const PROJECTS = {
     type: "Personal · Industrial Automation",
     year: "2024",
     tech: ["Siemens S7-400", "WinCC Flexible", "SCADA", "Ladder Logic"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" },
+    media: {},
     body: `
       <h4>Project Overview</h4>
       <p>Completed a Chemical Treatment Process Automation project as part of coursework at SLIR, using Siemens S7-400 (Simatic Manager) and WinCC Flexible for SCADA development. Focused on programming PLC logic to manage sequential operations — tank filling, timed heating, and pump control — implemented in ladder logic.</p>
@@ -256,7 +353,8 @@ const PROJECTS = {
     type: "Personal · PLC / Automation",
     year: "2024",
     tech: ["PLC Logic", "Ladder Logic", "Automation"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" },
+    media: {},
     body: `
       <h4>Project Overview</h4>
       <p>First PLC programming project, completed at the Sri Lanka Institute of Robotics (SLIR). Automated a 3-level elevator model using ladder logic programming, focusing on the control logic.</p>
@@ -272,7 +370,8 @@ const PROJECTS = {
     type: "Personal · Robotics",
     year: "2023",
     tech: ["Arduino", "Ultrasonic Sensor", "PID Control"],
-    repo: { label: "Not publicly available" },
+    repo: { label: "View on LinkedIn", url: "https://www.linkedin.com/in/hashin-gayasha-maharambage-350191285/details/projects/" },
+    media: {},
     body: `
       <h4>Project Overview</h4>
       <p>An Arduino-based obstacle-avoiding vehicle using ultrasonic sensors for detection and a PID controller to maintain stable, precise motor speed — ensuring smooth and efficient navigation.</p>
